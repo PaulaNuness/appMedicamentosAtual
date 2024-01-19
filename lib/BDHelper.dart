@@ -68,9 +68,9 @@ class BDHelper{
           "CREATE TABLE IF NOT EXISTS Usuario(id INTEGER PRIMARY KEY, nombre TEXT, contrasena TEXT, fechanacimento TEXT, sexo TEXT)"
         );
         //para añadir una segunda tabla
-        // await db.execute(
-        //   "CREATE TABLE Resultados(id INTEGER PRIMARY KEY, jugador1 TEXT, j1set1 TEXT, j1set1 TEXT)"
-        // );
+        await db.execute(
+          "CREATE TABLE if not exists Medicamento(id INTEGER PRIMARY KEY, nome TEXT,quantidade INTEGER, unidadeTempo TEXT,quantidadeEnvase INTEGER,recomendacoes TEXT,horarios TEXT  )"
+        );
       }
       );
     return baseDatos;
