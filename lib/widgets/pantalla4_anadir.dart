@@ -7,11 +7,12 @@ class Pantalla4_Anadir extends StatefulWidget {
 }
 
 class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
-  String? selectedMedicamento='';
-  String? selectedNumero='';
-  String? selectedDias='';
-  String? selectedComprimidos='';
+  String? selectedMedicamento;
+  String? selectedNumero;
+  String? selectedDias;
+  String? selectedComprimidos;
   List<String> selectedHorarios = [];
+  TextEditingController recomendacionesController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,9 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: TextField(),
+                  child: TextField(
+                    controller: recomendacionesController,
+                  ),
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -187,12 +190,18 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Pantalla3_usuario(),
-                          ),
-                        );
+                        if (camposPreenchidos()) {
+                          // Aqui você pode adicionar a lógica para salvar na base de dados
+                          // ...
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Pantalla3_usuario(),
+                            ),
+                          );
+                        } else {
+                          mostrarAlertaCamposVazios();
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.pink,
@@ -224,6 +233,35 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
           ),
         ),
       ),
+    );
+  }
+
+  bool camposPreenchidos() {
+    return selectedMedicamento != null &&
+        selectedNumero != null &&
+        selectedDias != null &&
+        selectedComprimidos != null &&
+        recomendacionesController.text.isNotEmpty &&
+        selectedHorarios.isNotEmpty;
+  }
+
+  void mostrarAlertaCamposVazios() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Campos vazios'),
+          content: Text('Preencha todos os campos.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
