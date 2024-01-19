@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter1/models/medicamentos.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
+import 'package:flutter1/BDHelper.dart';
 
 class Pantalla4_Anadir extends StatefulWidget {
   @override
@@ -7,16 +9,17 @@ class Pantalla4_Anadir extends StatefulWidget {
 }
 
 class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
-  String? selectedMedicamento;//la variable va tener un String o un vacio
+  String? selectedMedicamento;
   String? selectedNumero;
   String? selectedDias;
   String? selectedComprimidos;
-  List<String> selectedHorarios = [];//Inicializando una variable de String vacia
+  List<String> selectedHorarios = [];
+  TextEditingController recomendacoesController = TextEditingController();
+  BDHelper bdHelper = BDHelper();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // estructura de la interfaz
       body: Center(
         child: Container(
           width: 350,
@@ -33,35 +36,40 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
               ),
             ],
           ),
-          child: SingleChildScrollView(// no me salir la barra amarilla y negro
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-
-                DropdownButton<String>(//Cria um widget de botão suspenso onde os valores selecionados são do tipo String
-                  isExpanded: true,//Essa propriedade faz com que o dropdown ocupe toda a largura disponível, expandindo-se horizontalmente
-                  value: selectedMedicamento,//valor inicial
-                  items: <String>['PARACETAMOL', 'IBUPROFENO', 'AMOXICILINA', 'PARACETAMOL', 'OMEPRAZOL', 'ASPIRINA C', 'NOLOTIL', 'DIAZEPAM']//lista de opciones en el DropdownButton. Cada opcion es encapsulada en un DropdownMenuItem
-                      .map((String value) {
+                DropdownButton<String>(
+                  isExpanded: true,
+                  value: selectedMedicamento,
+                  items: <String>[
+                    'PARACETAMOL',
+                    'IBUPROFENO',
+                    'AMOXICILINA',
+                    'PARACETAMOL',
+                    'OMEPRAZOL',
+                    'ASPIRINA C',
+                    'NOLOTIL',
+                    'DIAZEPAM'
+                  ].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
                     );
-                  }).toList(),//Converte a lista de strings em uma lista de widgets DropdownMenuItem<String>. Cada item na lista é um widget que representa uma opção no dropdown
+                  }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedMedicamento = newValue;
                     });
-                  },//Especifica uma função que será chamada quando o valor selecionado no dropdown for alterado. O novo valor selecionado é passado como parâmetro (newValue),Atualiza o estado da classe StatefulWidget com o novo valor selecionado, garantindo que a interface do usuário seja reconstruída para refletir a alteração
+                  },
                   hint: Text('SELECCIONAR MEDICAMENTO'),
                 ),
-
-
                 SizedBox(height: 20),
                 DropdownButton<String>(
                   isExpanded: true,
-                  value: selectedNumero,//valor inicial
-                  items: List.generate(31, (index) => (index + 1).toString())//cria una lista de 1 a 31
+                  value: selectedNumero,
+                  items: List.generate(31, (index) => (index + 1).toString())
                       .map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -69,40 +77,34 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     );
                   }).toList(),
                   onChanged: (String? newValue) {
-                    setState(() {//el metodo el llamado
-                      selectedNumero = newValue;//la variable selectedNumero que armazena el valor atualmente selecionado
+                    setState(() {
+                      selectedNumero = newValue;
                     });
                   },
                   hint: Text('SELECCIONAR CANTIDAD'),
                 ),
-
-
                 SizedBox(height: 10),
-                DropdownButton<String>(// botão suspenso,os valores selecionados serão do tipo String
-                  isExpanded: true,// dropdown ocupe toda a largura disponível, expandindo-se horizontalmente
-                  value: selectedDias,//valor inicial
-                  items: ['DÍAS', 'MESES', 'AÑOS']// lista de itens disponíveis no dropdown
-                      .map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      })
-                      .toList(),//Converte a lista de strings em uma lista de widgets DropdownMenuItem<String>
+                DropdownButton<String>(
+                  isExpanded: true,
+                  value: selectedDias,
+                  items: ['DÍAS', 'MESES', 'AÑOS'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      selectedDias = newValue;//la variable selectedNumero que armazena el valor atualmente selecionado
+                      selectedDias = newValue;
                     });
-                  },//Especifica uma função que será chamada quando o valor selecionado no dropdown for alterado. O novo valor selecionado é passado como parâmetro (newValue)
+                  },
                   hint: Text('SELECCIONAR UNIDAD DE TIEMPO'),
                 ),
-
-
                 SizedBox(height: 20),
                 DropdownButton<String>(
                   isExpanded: true,
                   value: selectedComprimidos,
-                  items: List.generate(30, (index) => (index + 1).toString())//Gera uma lista de 30 strings, onde cada string é o resultado da expressão (index + 1).toString(). Isso cria uma lista de números de 1 a 30
+                  items: List.generate(30, (index) => (index + 1).toString())
                       .map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -116,8 +118,6 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   },
                   hint: Text('CANTIDAD EN EL ENVASE'),
                 ),
-
-
                 SizedBox(height: 20),
                 Text(
                   'RECOMENDACIONES:',
@@ -131,7 +131,9 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: TextField(),
+                  child: TextField(
+                    controller: recomendacoesController,
+                  ),
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -139,21 +141,19 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
-
-
                 Container(
                   height: 130,
-                  child: GridView.builder(//Cria um widget de grade (grid) onde os itens são construídos dinamicamente por meio de um construtor de itens
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(//Define a estrutura da grade, especificando o número fixo de colunas e espaçamentos entre as colunas e linhas
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       crossAxisSpacing: 5.0,
                       mainAxisSpacing: 5.0,
                     ),
-                    itemCount: 24,//Especifica o número total de itens na grade, que neste caso é 24
-                    itemBuilder: (context, index) {// Uma função que é chamada para construir cada item da grade. O índice index é usado para determinar qual item está sendo construído
+                    itemCount: 24,
+                    itemBuilder: (context, index) {
                       String horario =
-                          '${index.toString().padLeft(2, '0')}:00';// Cria uma string representando um horário formatado a partir do índice. Por exemplo, para o índice 0, a string será "00:00"
-                      return GestureDetector(//dentro do itemBuilder cria um GestureDetector para cada item da grade. Esse detector de gestos responde a toques, alternando a seleção do horário quando um item é tocado
+                          '${index.toString().padLeft(2, '0')}:00';
+                      return GestureDetector(
                         onTap: () {
                           setState(() {
                             if (selectedHorarios.contains(horario)) {
@@ -185,23 +185,19 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     },
                   ),
                 ),
-
-
                 SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                                  
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          Pantalla3_usuario(),
-                                    ),
-                                  );
-                                },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pantalla3_usuario(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.pink,
                         padding: EdgeInsets.all(16.0),
@@ -220,6 +216,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     ),
                     FloatingActionButton(
                       onPressed: () {
+                        _adicionarMedicamento();
                       },
                       backgroundColor: Colors.pink,
                       child: Icon(Icons.add),
@@ -231,7 +228,27 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
           ),
         ),
       ),
-      
     );
+  }
+
+  void _adicionarMedicamento() async {
+    String nome = selectedMedicamento ?? "";
+    int quantidade = int.tryParse(selectedNumero ?? "0") ?? 0;
+    String unidadeTempo = selectedDias ?? "";
+    int quantidadeEnvase = int.tryParse(selectedComprimidos ?? "0") ?? 0;
+    String recomendacoes = recomendacoesController.text;
+
+    Medicamento medicamento = Medicamento.withoutId(
+      nome,
+      quantidade,
+      unidadeTempo,
+      quantidadeEnvase,
+      recomendacoes,
+      selectedHorarios,
+    );
+
+    Map<String, dynamic> medicamentoMap = medicamento.toMap();
+
+    await bdHelper.insertarBD('Medicamento', medicamentoMap);
   }
 }
