@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter1/BDHelper.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
 
 class Pantalla4_Anadir extends StatefulWidget {
@@ -7,11 +8,14 @@ class Pantalla4_Anadir extends StatefulWidget {
 }
 
 class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
+  BDHelper bdHelper = BDHelper();
+
   String? selectedMedicamento;
   String? selectedNumero;
   String? selectedDias;
   String? selectedComprimidos;
   List<String> selectedHorarios = [];
+
   TextEditingController recomendacionesController = TextEditingController();
 
   @override
@@ -44,7 +48,6 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     'PARACETAMOL',
                     'IBUPROFENO',
                     'AMOXICILINA',
-                    'PARACETAMOL',
                     'OMEPRAZOL',
                     'ASPIRINA C',
                     'NOLOTIL',
@@ -190,18 +193,13 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        if (camposPreenchidos()) {
-                          // Aqui você pode adicionar a lógica para salvar na base de dados
-                          // ...
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Pantalla3_usuario(),
-                            ),
-                          );
-                        } else {
-                          mostrarAlertaCamposVazios();
-                        }
+                        _guardarEnBaseDatos();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pantalla3_usuario(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.pink,
@@ -222,6 +220,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     FloatingActionButton(
                       onPressed: () {
                         // Adicione aqui a lógica para salvar na base de dados
+                        _guardarEnBaseDatos();
                       },
                       backgroundColor: Colors.pink,
                       child: Icon(Icons.add),
@@ -236,32 +235,16 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
     );
   }
 
-  bool camposPreenchidos() {
-    return selectedMedicamento != null &&
-        selectedNumero != null &&
-        selectedDias != null &&
-        selectedComprimidos != null &&
-        recomendacionesController.text.isNotEmpty &&
-        selectedHorarios.isNotEmpty;
-  }
+  void _guardarEnBaseDatos() async {
+    Map<String, dynamic> fila = {
+      'nome': selectedMedicamento,
+      'quantidade': int.parse(selectedNumero ?? '0'),
+      'unidadeTempo': selectedDias,
+      'quantidadeEnvase': int.parse(selectedComprimidos ?? '0'),
+      'recomendacoes': recomendacionesController.text,
+      'horarios': selectedHorarios.join(','),
+    };
 
-  void mostrarAlertaCamposVazios() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Campos vazios'),
-          content: Text('Preencha todos os campos.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    await bdHelper.insertarBD('Medicamento', fila);
   }
 }
