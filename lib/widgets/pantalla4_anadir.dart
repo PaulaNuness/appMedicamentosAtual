@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter1/models/medicamentos.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
-import 'package:flutter1/BDHelper.dart';
 
 class Pantalla4_Anadir extends StatefulWidget {
   @override
@@ -14,8 +12,6 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
   String? selectedDias;
   String? selectedComprimidos;
   List<String> selectedHorarios = [];
-  TextEditingController recomendacoesController = TextEditingController();
-  BDHelper bdHelper = BDHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +39,11 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                 DropdownButton<String>(
                   isExpanded: true,
                   value: selectedMedicamento,
-                  items: [
+                  items: <String>[
                     'PARACETAMOL',
                     'IBUPROFENO',
                     'AMOXICILINA',
+                    'PARACETAMOL',
                     'OMEPRAZOL',
                     'ASPIRINA C',
                     'NOLOTIL',
@@ -86,12 +83,14 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                 DropdownButton<String>(
                   isExpanded: true,
                   value: selectedDias,
-                  items: ['DÍAS', 'MESES', 'AÑOS'].map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                  items: ['DÍAS', 'MESES', 'AÑOS']
+                      .map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      })
+                      .toList(),
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedDias = newValue;
@@ -130,9 +129,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: TextField(
-                    controller: recomendacoesController,
-                  ),
+                  child: TextField(),
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -215,7 +212,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     ),
                     FloatingActionButton(
                       onPressed: () {
-                        _adicionarMedicamento();
+                        // Adicione aqui a lógica para salvar na base de dados
                       },
                       backgroundColor: Colors.pink,
                       child: Icon(Icons.add),
@@ -228,26 +225,5 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
         ),
       ),
     );
-  }
-
-  void _adicionarMedicamento() async {
-    String nome = selectedMedicamento ?? "";
-    int quantidade = int.tryParse(selectedNumero ?? "0") ?? 0;
-    String unidadeTempo = selectedDias ?? "";
-    int quantidadeEnvase = int.tryParse(selectedComprimidos ?? "0") ?? 0;
-    String recomendacoes = recomendacoesController.text;
-
-    Medicamento medicamento = Medicamento.withoutId(
-      nome,
-      quantidade,
-      unidadeTempo,
-      quantidadeEnvase,
-      recomendacoes,
-      selectedHorarios,
-    );
-
-    Map<String, dynamic> medicamentoMap = medicamento.toMap();
-
-    await bdHelper.insertarBD('Medicamento', medicamentoMap);
   }
 }
