@@ -193,13 +193,8 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                        // Verifica e salva na base de dados
                         _guardarEnBaseDatos();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Pantalla3_usuario(),
-                          ),
-                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.pink,
@@ -235,7 +230,32 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
     );
   }
 
-  void _guardarEnBaseDatos() async {
+  void _guardarEnBaseDatos() {
+    // Verifica se todos os campos necessários foram preenchidos
+    List<String> emptyFields = checkEmptyFields();
+    if (emptyFields.isNotEmpty) {
+      // Exibe uma mensagem indicando campos inválidos
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Campos Inválidos"),
+            content: Text("Por favor, preencha todos os campos corretamente."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return; // Sai da função se algum campo estiver vazio
+    }
+
+    // Cria um mapa com os dados do medicamento
     Map<String, dynamic> fila = {
       'nome': selectedMedicamento,
       'quantidade': int.parse(selectedNumero ?? '0'),
@@ -245,6 +265,50 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
       'horarios': selectedHorarios.join(','),
     };
 
-    await bdHelper.insertarBD('Medicamento', fila);
+    // Insere o medicamento no banco de dados
+    bdHelper.insertarBD('Medicamento', fila);
+
+    // Limpar os campos após a inserção
+    setState(() {
+      selectedMedicamento = null;
+      selectedNumero = null;
+      selectedDias = null;
+      selectedComprimidos = null;
+      selectedHorarios = [];
+      recomendacionesController.clear();
+    });
+
+    // Exibir uma mensagem indicando que os dados foram inseridos
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Medicamento inserido com sucesso!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
+  List<String> checkEmptyFields() {
+    List<String> emptyFields = [];
+
+    if (selectedMedicamento == null || selectedMedicamento!.isEmpty) {
+      emptyFields.add("Medicamento");
+    }
+    if (selectedNumero == null) {
+      emptyFields.add("Número");
+    }
+    if (selectedDias == null) {
+      emptyFields.add("Unidade de Tempo");
+    }
+    if (selectedComprimidos == null) {
+      emptyFields.add("Quantidade no Envase");
+    }
+    if (selectedHorarios.isEmpty) {
+      emptyFields.add("Horários");
+    }
+    if (recomendacionesController.text.isEmpty) {
+      emptyFields.add("Recomendações");
+    }
+
+    return emptyFields;
   }
 }
