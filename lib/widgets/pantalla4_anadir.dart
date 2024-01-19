@@ -7,10 +7,10 @@ class Pantalla4_Anadir extends StatefulWidget {
 }
 
 class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
-  String? selectedMedicamento;
-  String? selectedNumero;
-  String? selectedDias;
-  String? selectedComprimidos;
+  String? selectedMedicamento='';
+  String? selectedNumero='';
+  String? selectedDias='';
+  String? selectedComprimidos='';
   List<String> selectedHorarios = [];
 
   @override
