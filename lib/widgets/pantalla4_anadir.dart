@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter1/BDHelper.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
 
 class Pantalla4_Anadir extends StatefulWidget {
@@ -8,8 +7,6 @@ class Pantalla4_Anadir extends StatefulWidget {
 }
 
 class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
-  BDHelper bdHelper = BDHelper();
-
   String? selectedMedicamento;
   String? selectedNumero;
   String? selectedDias;
@@ -17,6 +14,94 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
   List<String> selectedHorarios = [];
 
   TextEditingController recomendacionesController = TextEditingController();
+
+  // Função para inserir o medicamento no banco de dados
+  void inserirMedicamentoNoBancoDeDados() async {
+    // Verifica se todos os campos necessários foram preenchidos
+    List<String> emptyFields = checkEmptyFields();
+    if (emptyFields.isNotEmpty) {
+      // Exibe uma mensagem indicando campos inválidos
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Campos Inválidos"),
+            content: Text("Por favor, preencha todos os campos corretamente."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return; // Sai da função se algum campo estiver vazio
+    }
+
+    // Cria um mapa com os dados do medicamento
+    Map<String, dynamic> medicamentoData = {
+      'nome_medicamento': selectedMedicamento,
+      'quantidade': int.parse(selectedNumero!), // Converte para inteiro
+      'unidade_tempo': selectedDias,
+      'quantidade_envase': int.parse(selectedComprimidos!), // Converte para inteiro
+      'recomendacoes': recomendacionesController.text,
+      'horarios': selectedHorarios.join(','), // Junta os horários em uma string separada por vírgulas
+    };
+
+    // Insere o medicamento no banco de dados
+    int rowsAffected = await insertarBD('medicamento', medicamentoData);
+
+    // Verifica se a inserção foi bem-sucedida
+    if (rowsAffected > 0) {
+      // Limpa os campos após a inserção
+      setState(() {
+        selectedMedicamento = null;
+        selectedNumero = null;
+        selectedDias = null;
+        selectedComprimidos = null;
+        selectedHorarios = [];
+        recomendacionesController.clear();
+      });
+
+      // Exibe uma mensagem indicando que os dados foram inseridos
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Medicamento inserido com sucesso!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+
+      // Navega de volta para a Pantalla3_usuario
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Pantalla3_usuario(),
+        ),
+      );
+    } else {
+      // Exibe uma mensagem de erro se a inserção falhar
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Erro na Inserção"),
+            content: Text("Ocorreu um erro ao inserir o medicamento."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +133,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     'PARACETAMOL',
                     'IBUPROFENO',
                     'AMOXICILINA',
+                    'PARACETAMOL',
                     'OMEPRAZOL',
                     'ASPIRINA C',
                     'NOLOTIL',
@@ -65,6 +151,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   },
                   hint: Text('SELECCIONAR MEDICAMENTO'),
                 ),
+
                 SizedBox(height: 20),
                 DropdownButton<String>(
                   isExpanded: true,
@@ -83,18 +170,17 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   },
                   hint: Text('SELECCIONAR CANTIDAD'),
                 ),
+
                 SizedBox(height: 10),
                 DropdownButton<String>(
                   isExpanded: true,
                   value: selectedDias,
-                  items: ['DÍAS', 'MESES', 'AÑOS']
-                      .map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      })
-                      .toList(),
+                  items: ['DÍAS', 'MESES', 'AÑOS'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedDias = newValue;
@@ -102,6 +188,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   },
                   hint: Text('SELECCIONAR UNIDAD DE TIEMPO'),
                 ),
+
                 SizedBox(height: 20),
                 DropdownButton<String>(
                   isExpanded: true,
@@ -120,6 +207,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   },
                   hint: Text('CANTIDAD EN EL ENVASE'),
                 ),
+
                 SizedBox(height: 20),
                 Text(
                   'RECOMENDACIONES:',
@@ -137,12 +225,14 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     controller: recomendacionesController,
                   ),
                 ),
+
                 SizedBox(height: 20),
                 Text(
                   'Horario/Alertas:',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
+
                 Container(
                   height: 130,
                   child: GridView.builder(
@@ -187,13 +277,14 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     },
                   ),
                 ),
+
                 SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        _guardarEnBaseDatos();
+                        // Navegar de volta para a Pantalla3_usuario
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -219,8 +310,26 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     ),
                     FloatingActionButton(
                       onPressed: () {
-                        // Adicione aqui a lógica para salvar na base de dados
-                        _guardarEnBaseDatos();
+                        // Inserir medicamento no banco de dados
+                        inserirMedicamentoNoBancoDeDados();
+
+                        // Limpar os campos após a inserção
+                        setState(() {
+                          selectedMedicamento = null;
+                          selectedNumero = null;
+                          selectedDias = null;
+                          selectedComprimidos = null;
+                          selectedHorarios = [];
+                          recomendacionesController.clear();
+                        });
+
+                        // Exibir uma mensagem indicando que os dados foram inseridos
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Medicamento inserido com sucesso!'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                       },
                       backgroundColor: Colors.pink,
                       child: Icon(Icons.add),
@@ -235,16 +344,28 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
     );
   }
 
-  void _guardarEnBaseDatos() async {
-    Map<String, dynamic> fila = {
-      'nome': selectedMedicamento,
-      'quantidade': int.parse(selectedNumero ?? '0'),
-      'unidadeTempo': selectedDias,
-      'quantidadeEnvase': int.parse(selectedComprimidos ?? '0'),
-      'recomendacoes': recomendacionesController.text,
-      'horarios': selectedHorarios.join(','),
-    };
+  List<String> checkEmptyFields() {
+    List<String> emptyFields = [];
 
-    await bdHelper.insertarBD('Medicamento', fila);
+    if (selectedMedicamento == null || selectedMedicamento!.isEmpty) {
+      emptyFields.add("Medicamento");
+    }
+    if (selectedNumero == null) {
+      emptyFields.add("Número");
+    }
+    if (selectedDias == null) {
+      emptyFields.add("Unidade de Tempo");
+    }
+    if (selectedComprimidos == null) {
+      emptyFields.add("Quantidade no Envase");
+    }
+    if (selectedHorarios.isEmpty) {
+      emptyFields.add("Horários");
+    }
+    if (recomendacionesController.text.isEmpty) {
+      emptyFields.add("Recomendações");
+    }
+
+    return emptyFields;
   }
 }
