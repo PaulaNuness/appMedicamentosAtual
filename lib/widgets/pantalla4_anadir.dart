@@ -43,11 +43,10 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                 DropdownButton<String>(
                   isExpanded: true,
                   value: selectedMedicamento,
-                  items: <String>[
+                  items: [
                     'PARACETAMOL',
                     'IBUPROFENO',
                     'AMOXICILINA',
-                    'PARACETAMOL',
                     'OMEPRAZOL',
                     'ASPIRINA C',
                     'NOLOTIL',
