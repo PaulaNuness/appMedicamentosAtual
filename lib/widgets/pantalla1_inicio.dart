@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter1/widgets/pantalla2_registrar.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
 import 'package:flutter1/BDHelper.dart';
+import 'package:flutter1/widgets/pantalla7_borrar_medicamento.dart';
+import 'package:flutter1/widgets/pantalla8_configuracion.dart';
 
 class Pantalla1_Inicio extends StatelessWidget {
   BDHelper bdHelper = BDHelper();
@@ -30,7 +32,13 @@ class Pantalla1_Inicio extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
-
+              // Navegar para a tela de configurações quando o ícone de configurações for pressionado
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>Pantalla8_configuracion(),
+                ),
+              );
             },
           ),
         ],
