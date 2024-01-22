@@ -1,17 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter1/BDHelper.dart';
 import 'package:flutter1/widgets/pantalla1_inicio.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
 import 'package:flutter1/widgets/pantalla4_anadir.dart';
 import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
 import 'package:intl/intl.dart';
 
-class Medicamento {
-  String nombre;
-  DateTime horaProxima;
 
-  Medicamento({required this.nombre, required this.horaProxima});
-}
 
 class VisitaMedico {
   String nomeMedico;
@@ -26,6 +22,22 @@ class AgendaMedicamentos extends StatefulWidget {
 }
 
 class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
+  BDHelper bdHelper = BDHelper();
+  List<Map<String, dynamic>> medicamentosAReponer = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _carregarMedicamentos();
+  }
+
+  Future<void> _carregarMedicamentos() async {
+    List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos();
+
+    setState(() {
+      medicamentosAReponer = medicamentos;
+    });
+  }
   int _selectedIndex = 0;
   late Timer _timer;
 
@@ -40,28 +52,6 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
     VisitaMedico(nomeMedico: 'Dr. Silva', dataVisita: DateTime.now().add(Duration(days: 7))),
     VisitaMedico(nomeMedico: 'Dra. Santos', dataVisita: DateTime.now().add(Duration(days: 14))),
   ];
-
-  List<Medicamento> medicamentos = [
-    Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2))),
-    Medicamento(nombre: 'Ibuprofeno', horaProxima: DateTime.now().add(Duration(hours: 14))),
-    Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2))),
-    Medicamento(nombre: 'Ibuprofeno', horaProxima: DateTime.now().add(Duration(hours: 14))),
-    Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2))),
-    Medicamento(nombre: 'Ibuprofeno', horaProxima: DateTime.now().add(Duration(hours: 14)))
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    medicamentos.sort((a, b) => a.horaProxima.compareTo(b.horaProxima));
-    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
-      setState(() {
-        for (var medicamento in medicamentos) {
-          medicamento.horaProxima = medicamento.horaProxima.subtract(Duration(minutes: 1));
-        }
-      });
-    });
-  }
 
   @override
   void dispose() {
@@ -93,74 +83,50 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: medicamentos.length,
-              itemBuilder: (context, index) {
-                var medicamento = medicamentos[index];
-                var tiempoRestante = medicamento.horaProxima.difference(DateTime.now());
+  itemCount: medicamentosAReponer.length,
+  itemBuilder: (context, index) {
+    var medicamento = medicamentosAReponer[index];
 
-                return Card(
-                  elevation: 5,
-                  margin: EdgeInsets.all(10),
-                  child: ListTile(
-                    title: Text(
-                      medicamento.nombre,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 5),
-                        Text(
-                          'Próxima dose em: ${tiempoRestante.inHours}h ${tiempoRestante.inMinutes.remainder(60)}min',
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Icon(Icons.access_time, color: Colors.pink, size: 18),
-                            SizedBox(width: 5),
-                            Text(
-                              'Às ${DateFormat.Hm().format(medicamento.horaProxima)}',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.pink,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // Lógica para o primeiro botão
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 152, 177, 233),
-                          ),
-                          child: Text('SI'),
-                        ),
-                        SizedBox(width: 8),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Lógica para o segundo botão
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                          ),
-                          child: Text('NO'),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.all(10),
+      child: ListTile(
+        title: Text(
+          medicamento['nome'],
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                // Lógica para o primeiro botão
               },
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 152, 177, 233),
+              ),
+              child: Text('SI'),
             ),
+            SizedBox(width: 8),
+            ElevatedButton(
+              onPressed: () {
+                // Lógica para o segundo botão
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+              ),
+              child: Text('NO'),
+            ),
+          ],
+        ),
+      ),
+    );
+  },
+),
+
           ),
           SizedBox(height: 50),
           Text(

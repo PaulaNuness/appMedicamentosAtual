@@ -38,4 +38,12 @@ class Medicamento {
       horarios: (map['horarios'] as String).split(','), // Convertendo a string de volta para uma lista
     );
   }
+
+    // Getters individuais
+  String get getNome => nome;
+  int get getQuantidade => quantidade;
+  String get getUnidadeTempo => unidadeTempo;
+  int get getQuantidadeEnvase => quantidadeEnvase;
+  String get getRecomendacoes => recomendacoes;
+  List<String> get getHorarios => horarios;
 }
