@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter1/models/medicamento.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -65,13 +66,35 @@ class BDHelper{
   }
 
   
-    Future<void> borrarMedicamento(int id) async {
+  Future<void> borrarMedicamento(int id) async {
     Database? bd = await baseDatos;
     await bd!.delete('Medicamento', where: 'id = ?', whereArgs: [id]);
   }
 
 
-  
+Future<void> decrementarQuantidadeMedicamento( int idMedicamento) async {
+  var medicamento = await _baseDatos!.query('Medicamento', where: 'id = ?', whereArgs: [idMedicamento]);
+  if (medicamento.isNotEmpty) {
+    var quantidadeAtual = medicamento.first['quantidade'] as int;
+    var quantidadeEnvaseAtual = medicamento.first['quantidadeEnvase'] as int;
+
+    if (quantidadeAtual > 0 && quantidadeEnvaseAtual > 0) {
+      await _baseDatos!.update(
+        'Medicamento',
+        {
+          'quantidade': quantidadeAtual - 1,
+          'quantidadeEnvase': quantidadeEnvaseAtual - 1,
+        },
+        where: 'id = ?',
+        whereArgs: [idMedicamento],
+      );
+    }
+  }
+}
+
+
+
+
 
   _inicializarBD() async{//é um método privado que é chamado internamente para inicializar o banco de dados SQLite
     var directorio = await getDatabasesPath();//obtém o caminho do diretório de bancos de dados.

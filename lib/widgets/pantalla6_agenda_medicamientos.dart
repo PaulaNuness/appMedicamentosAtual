@@ -7,8 +7,6 @@ import 'package:flutter1/widgets/pantalla4_anadir.dart';
 import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
 import 'package:intl/intl.dart';
 
-
-
 class VisitaMedico {
   String nomeMedico;
   DateTime dataVisita;
@@ -63,7 +61,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Impede a exibição do botão de voltar
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.grey[300],
         title: Center(
           child: Text(
@@ -82,57 +80,93 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Expanded(
-  child: ListView.builder(
-    itemCount: medicamentosAReponer.length,
-    itemBuilder: (context, index) {
-      var medicamento = medicamentosAReponer[index];
+            child: ListView.builder(
+              itemCount: medicamentosAReponer.length,
+              itemBuilder: (context, index) {
+                var medicamento = medicamentosAReponer[index];
 
-      return Card(
-        elevation: 5,
-        margin: EdgeInsets.all(10),
-        child: ListTile(
-          title: Text(
-            medicamento['nome'],
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+                return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text(
+                      medicamento['nome'],
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      'Horarios: ${medicamento['horarios']}',
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+ElevatedButton(
+  onPressed: () async {
+    // Chame o método para decrementar a quantidade
+    await bdHelper.decrementarQuantidadeMedicamento(medicamento['id'] as int);
+    // Atualize a lista de medicamentos
+    await _carregarMedicamentos();
+
+    // Mostrar o AlertDialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("OKEY"),
+          content: Text("Felicidades, pronto estarás mejor"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("OK"),
             ),
-          ),
-          subtitle: Text(
-            'Horarios: ${medicamento['horarios']}',
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  // Lógica para o primeiro botão
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 152, 177, 233),
-                ),
-                child: Text('SI'),
-              ),
-              SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {
-                  // Lógica para o segundo botão
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                ),
-                child: Text('NO'),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
+          ],
+        );
+      },
+    );
+  },
+  style: ElevatedButton.styleFrom(
+    primary: Color.fromARGB(255, 152, 177, 233),
   ),
+  child: Text('SI'),
 ),
 
-
+                        
+                        SizedBox(width: 8),
+                        ElevatedButton(
+                          onPressed: () {
+                                showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Por favor"),
+          content: Text("Debes tomar la medicacion"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blue,
+                          ),
+                          child: Text('NO'),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
           SizedBox(height: 50),
           Text(
@@ -167,17 +201,16 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(10.0),
         child: ElevatedButton(
-                    onPressed: () {
-                                    // Voltar para a tela de usuário
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Pantalla3_usuario(),
-                          ),
-                        );
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Pantalla3_usuario(),
+              ),
+            );
           },
           style: ElevatedButton.styleFrom(
-            primary:Color.fromARGB(255, 152, 177, 233),
+            primary: Color.fromARGB(255, 152, 177, 233),
             padding: EdgeInsets.symmetric(vertical: 15.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -194,5 +227,15 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
         ),
       ),
     );
+  }
+
+  Future<void> _decrementarQuantidadeMedicamento(int index) async {
+    if (index >= 0 && index < medicamentosAReponer.length) {
+      int idMedicamento = medicamentosAReponer[index]['id'];
+
+      await bdHelper.decrementarQuantidadeMedicamento(idMedicamento);
+
+      _carregarMedicamentos();
+    }
   }
 }
