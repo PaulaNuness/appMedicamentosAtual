@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter1/widgets/pantalla1_inicio.dart';
+import 'package:flutter1/widgets/pantalla3_usuario.dart';
 import 'package:flutter1/widgets/pantalla4_anadir.dart';
 import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
 import 'package:intl/intl.dart';
@@ -43,7 +44,10 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   List<Medicamento> medicamentos = [
     Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2))),
     Medicamento(nombre: 'Ibuprofeno', horaProxima: DateTime.now().add(Duration(hours: 14))),
-    // Adicione mais medicamentos conforme necessário
+    Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2))),
+    Medicamento(nombre: 'Ibuprofeno', horaProxima: DateTime.now().add(Duration(hours: 14))),
+    Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2))),
+    Medicamento(nombre: 'Ibuprofeno', horaProxima: DateTime.now().add(Duration(hours: 14)))
   ];
 
   @override
@@ -137,7 +141,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                             // Lógica para o primeiro botão
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.pink,
+                            primary: Color.fromARGB(255, 152, 177, 233),
                           ),
                           child: Text('SI'),
                         ),
@@ -191,11 +195,17 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(10.0),
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
+                    onPressed: () {
+                                    // Voltar para a tela de usuário
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pantalla3_usuario(),
+                          ),
+                        );
           },
           style: ElevatedButton.styleFrom(
-            primary: Color.fromARGB(255, 233, 83, 208),
+            primary:Color.fromARGB(255, 152, 177, 233),
             padding: EdgeInsets.symmetric(vertical: 15.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),

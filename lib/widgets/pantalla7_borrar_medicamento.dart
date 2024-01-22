@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter1/BDHelper.dart';
+import 'package:flutter1/widgets/pantalla3_usuario.dart';
 
 class pantalla7_borrar_medicamiento extends StatefulWidget {
   @override
@@ -34,9 +35,10 @@ class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
+        automaticallyImplyLeading: false, // Remover a seta de voltar
         title: Center(
           child: Text(
-            'Borrar',
+            'MEDICAMENTOS',
             style: TextStyle(
               fontSize: 24,
               color: Colors.pink,
@@ -92,6 +94,35 @@ class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
               ),
             );
           },
+        ),
+      ),
+            bottomNavigationBar: Container(
+        padding: EdgeInsets.all(10.0),
+        child: ElevatedButton(
+          onPressed: () {
+                                    // Voltar para a tela de usuário
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pantalla3_usuario(),
+                          ),
+                        );
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 152, 177, 233),
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+          child: Text(
+            'Sair',
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );

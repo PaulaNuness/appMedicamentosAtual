@@ -105,7 +105,7 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
                         );
           },
           style: ElevatedButton.styleFrom(
-            primary: Color.fromARGB(255, 233, 83, 208),
+            primary: Color.fromARGB(255, 152, 177, 233),
             padding: EdgeInsets.symmetric(vertical: 15.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
