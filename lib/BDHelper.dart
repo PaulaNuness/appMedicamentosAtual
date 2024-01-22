@@ -62,6 +62,8 @@ class BDHelper{
     var resultado = await bd!.query('Medicamento');
     return resultado;
   }
+
+  
     Future<void> borrarMedicamento(int id) async {
     Database? bd = await baseDatos;
     await bd!.delete('Medicamento', where: 'id = ?', whereArgs: [id]);

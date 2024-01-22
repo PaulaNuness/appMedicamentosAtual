@@ -57,38 +57,63 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
         child: ListView.builder(
           itemCount: medicamentosAReponer.length,
           itemBuilder: (context, index) {
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 233, 83, 208),
-                child: Text(
-                  '${medicamentosAReponer[index]['quantidade']}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              title: Text(
-                medicamentosAReponer[index]['nome'],
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              subtitle: Text(
-                'Quantidade restante: ${medicamentosAReponer[index]['quantidade']}',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              onTap: () {
-                // Navegar para a tela de farmácias mais próximas
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FarmaciasScreen()),
-                );
-              },
-            );
+return ListTile(
+  leading: CircleAvatar(
+    backgroundColor: Color.fromARGB(255, 233, 83, 208),
+    child: Text(
+      '${medicamentosAReponer[index]['quantidade']}',
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
+  title: Text(
+    medicamentosAReponer[index]['nome'],
+    style: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+  subtitle: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Cantidad restante a tomar: ${medicamentosAReponer[index]['quantidade']}',
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+      Text(
+        'Cantidad envase: ${medicamentosAReponer[index]['quantidadeEnvase']}',
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+            Text(
+        'Recomendaciones: ${medicamentosAReponer[index]['recomendacoes']}',
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+                  Text(
+        'Horarios: ${medicamentosAReponer[index]['horarios']}',
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+
+    ],
+  ),
+  onTap: () {
+    // Navegar para a tela de farmácias mais próximas
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FarmaciasScreen()),
+    );
+  },
+);
+
           },
         ),
       ),
