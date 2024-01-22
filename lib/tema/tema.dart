@@ -66,14 +66,14 @@ class CargadorTema with ChangeNotifier {
   ThemeData _miTemaClaro(){
     return (ThemeData.light().copyWith(
           colorScheme: const ColorScheme(
-            primary: Color(0xFF2196F3), // Azul primario
-            secondary: Color.fromARGB(255, 134, 208, 248), // Color secundario
+            primary:  Color.fromARGB(255, 242, 236, 236),
+            secondary:  Color.fromARGB(255, 233, 83, 208), // Color secundario
             background: Color.fromARGB(255, 214, 236, 250), // Color de fondo
             surface: Colors.white, // Color de la superficie
-            onPrimary: Colors.black, // Color del texto sobre el color primario
-            onSecondary: Colors.black, // Color del texto sobre el color secundario
-            onBackground: Colors.black, // Color del texto sobre el fondo
-            onSurface: Colors.black, // Color del texto sobre la superficie
+            onPrimary:  Colors.pink, // Color del texto sobre el color primario
+            onSecondary:  Colors.white, // Color del texto sobre el color secundario
+            onBackground:  Colors.pink, // Color del texto sobre el fondo
+            onSurface:Color.fromARGB(255, 233, 83, 208),// Color del texto sobre la superficie
             brightness: Brightness.light, // Brillo del tema claro
             error: Color(0xFFFF6E40),
             onError: Color(0xFFECEFF1),

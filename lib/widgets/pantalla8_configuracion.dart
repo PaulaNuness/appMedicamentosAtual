@@ -23,6 +23,9 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
       appBar: AppBar(
         title: Text('Ajustes',
             style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
               color: temaActual.temaActual.colorScheme.onPrimary,
             )),
         //configuramos el color de fondo
@@ -43,7 +46,9 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
             title: Text(
               "Ajustes generales",
               style: TextStyle(
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
                 color: temaActual.temaActual.colorScheme.onSecondary,
               ),
             ),
@@ -58,7 +63,9 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
             title: Text(
               "Ajustes de apariencia",
               style: TextStyle(
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
                 color: temaActual.temaActual.colorScheme.onSecondary,
               ),
             ),
@@ -68,6 +75,7 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
             title: Text(
               "Tema oscuro",
               style: TextStyle(
+                fontSize: 25,
                 color: temaActual.temaActual.colorScheme.onPrimary,
               ),
             ),
@@ -82,6 +90,7 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
             title: Text(
               "Ajustes de usuario",
               style: TextStyle(
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: temaActual.temaActual.colorScheme.onSecondary,
               ),
