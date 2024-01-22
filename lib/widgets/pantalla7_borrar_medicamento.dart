@@ -90,6 +90,9 @@ class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
                 onPressed: () {
                   _borrarMedicamento(medicamentosAReponer[index]['id']); // Chama a função para excluir o medicamento
                 },
+                style: ElevatedButton.styleFrom(
+    backgroundColor:  Color.fromARGB(255, 152, 177, 233), // Cor do botão "Borrar"
+  ),
                 child: Text('Borrar'),
               ),
             );

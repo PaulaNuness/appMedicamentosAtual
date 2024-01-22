@@ -68,17 +68,17 @@ class CargadorTema with ChangeNotifier {
           colorScheme: const ColorScheme(
             primary:  Color.fromARGB(255, 242, 236, 236),
             secondary:  Color.fromARGB(255, 233, 83, 208), // Color secundario
-            background: Color.fromARGB(255, 214, 236, 250), // Color de fondo
+            background:  Colors.black, // Color de fondo
             surface: Colors.white, // Color de la superficie
             onPrimary:  Colors.pink, // Color del texto sobre el color primario
-            onSecondary:  Colors.white, // Color del texto sobre el color secundario
-            onBackground:  Colors.pink, // Color del texto sobre el fondo
-            onSurface:Color.fromARGB(255, 233, 83, 208),// Color del texto sobre la superficie
+            onSecondary:  Colors.black, // Color del texto sobre el color secundario
+            onBackground:  Colors.black, // Color del texto sobre el fondo
+            onSurface: Colors.black,// Color del texto sobre la superficie
             brightness: Brightness.light, // Brillo del tema claro
             error: Color(0xFFFF6E40),
-            onError: Color(0xFFECEFF1),
-            tertiary: Colors.white,
-            onTertiary:Colors.grey,
+            onError: Color.fromARGB(255, 152, 177, 233),
+            tertiary: Color.fromARGB(255, 152, 177, 233),
+            onTertiary:Color.fromARGB(255, 152, 177, 233),
           ),
         )
       );
