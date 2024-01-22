@@ -36,7 +36,7 @@ class Pantalla1_Inicio extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>Pantalla8_configuracion(),
+                  builder: (context) => Pantalla8_configuracion(),
                 ),
               );
             },
