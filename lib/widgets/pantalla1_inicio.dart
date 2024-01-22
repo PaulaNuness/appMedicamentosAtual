@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter1/widgets/pantalla2_registrar.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
@@ -26,6 +25,15 @@ class Pantalla1_Inicio extends StatelessWidget {
             ),
           ),
         ),
+        actions: [
+          // Ícone de Configurações
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+
+            },
+          ),
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -92,7 +100,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Erro"),
-                            content: Text("Por favor, preencha o usuário e a senha."),
+                            content: Text(
+                                "Por favor, preencha o usuário e a senha."),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -113,7 +122,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Erro"),
-                            content: Text("Por favor, preencha o campo de usuário."),
+                            content:
+                                Text("Por favor, preencha o campo de usuário."),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -134,7 +144,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Erro"),
-                            content: Text("Por favor, preencha o campo de senha."),
+                            content:
+                                Text("Por favor, preencha o campo de senha."),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -149,7 +160,9 @@ class Pantalla1_Inicio extends StatelessWidget {
                       return; // Impede a continuação do código se o campo de senha estiver vazio
                     }
 
-                    List<Map<String, dynamic>> resultado = await bdHelper.consultarSQL(
+                    List<
+                        Map<String,
+                            dynamic>> resultado = await bdHelper.consultarSQL(
                         "SELECT * FROM Usuario WHERE nombre = '$usuario' AND contrasena = '$contrasena'");
 
                     if (resultado.isNotEmpty) {
@@ -165,7 +178,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Erro de Autenticação"),
-                            content: Text("Credenciais incorretas. Tente novamente."),
+                            content: Text(
+                                "Credenciais incorretas. Tente novamente."),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -183,7 +197,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                     primary: Color.fromARGB(255, 233, 83, 208),
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                      borderRadius: BorderRadius.circular(
+                          8.0), // Ajuste o valor conforme necessário
                     ),
                     elevation: 6.0,
                     shadowColor: Color.fromARGB(255, 33, 33, 214),
@@ -224,7 +239,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                     primary: Color.fromARGB(255, 233, 83, 208),
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                      borderRadius: BorderRadius.circular(
+                          8.0), // Ajuste o valor conforme necessário
                     ),
                     elevation: 6.0,
                     shadowColor: Color.fromARGB(255, 33, 33, 214),

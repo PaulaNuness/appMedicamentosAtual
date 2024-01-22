@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter1/widgets/pantalla1_inicio.dart';
 
@@ -7,22 +6,20 @@ class RegistroHecho extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.grey[300], // Cor de fundo cinza
-          title: Center(
-            child: Text(
-              'Hola, bienvenido.',
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.pink,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                fontFamily: 'Arial',
-              ),
+        backgroundColor: Colors.grey[300], // Cor de fundo cinza
+        title: Center(
+          child: Text(
+            'Hola, bienvenido.',
+            style: TextStyle(
+              fontSize: 24,
+              color: Colors.pink,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              fontFamily: 'Arial',
             ),
           ),
         ),
-
-
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +34,7 @@ class RegistroHecho extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
-               Container(
+            Container(
               width: 200,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -50,16 +47,22 @@ class RegistroHecho extends StatelessWidget {
               ),
               child: ElevatedButton(
                 onPressed: () {
-                 Navigator.pop(context);
+                  Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 164, 216, 240),
+                  primary: Color.fromARGB(255, 233, 83, 208),
                   padding: EdgeInsets.all(16.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        8.0), // Ajuste o valor conforme necessário
+                  ),
+                  elevation: 6.0,
+                  shadowColor: Color.fromARGB(255, 33, 33, 214),
                 ),
                 child: Text(
                   'SALIR',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 33, 33, 214),
+                    color: Color.fromARGB(255, 227, 227, 235),
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Sans-serif',

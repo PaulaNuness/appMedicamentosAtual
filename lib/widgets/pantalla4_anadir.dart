@@ -276,6 +276,23 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
     // Insere o medicamento no banco de dados
     bdHelper.insertarBD('Medicamento', fila);
 
+          showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Medicamento Inserido"),
+            content: Text("Medicamento inserido com sucesso!"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
     // Limpar os campos após a inserção
     setState(() {
       selectedMedicamento = null;
