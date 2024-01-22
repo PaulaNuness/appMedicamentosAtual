@@ -165,13 +165,18 @@ class _Pantalla2_RegistrarState extends State<Pantalla2_Registrar> {
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(255, 164, 216, 240),
-                          padding: EdgeInsets.all(16.0),
-                        ),
+                    primary: Color.fromARGB(255, 233, 83, 208),
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
+                  ),
                         child: Text(
                           'SALIR',
                           style: TextStyle(
-                            color: Color.fromARGB(255, 33, 33, 214),
+                            color: Color.fromARGB(255, 227, 227, 235),
                             fontSize: 21,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Sans-serif',
@@ -326,13 +331,18 @@ class _Pantalla2_RegistrarState extends State<Pantalla2_Registrar> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(255, 164, 216, 240),
-                          padding: EdgeInsets.all(16.0),
-                        ),
+                    primary: Color.fromARGB(255, 233, 83, 208),
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
+                  ),
                         child: Text(
                           'REGISTRAR',
                           style: TextStyle(
-                            color: Color.fromARGB(255, 33, 33, 214),
+                            color: Color.fromARGB(255, 227, 227, 235),
                             fontSize: 21,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Sans-serif',
