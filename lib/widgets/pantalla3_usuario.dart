@@ -229,7 +229,7 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          pantalla7_borrar_medicamiento(),
+                                           AgendaMedicamentos(),
                                     ),
                                   );
                                 },
@@ -271,7 +271,7 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          pantalla5_lista_medicamientos(),
+                                         pantalla7_borrar_medicamiento(),
                                     ),
                                   );
                                 },

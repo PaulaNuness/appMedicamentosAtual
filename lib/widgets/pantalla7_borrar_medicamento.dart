@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter1/BDHelper.dart';
-import 'package:sqflite/sqflite.dart';
 
 class pantalla7_borrar_medicamiento extends StatefulWidget {
   @override
@@ -25,6 +24,11 @@ class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
     });
   }
 
+  Future<void> _borrarMedicamento(int id) async {
+    await bdHelper.borrarMedicamento(id);
+    _carregarMedicamentos(); // Recarrega a lista após excluir o medicamento
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +36,7 @@ class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
         backgroundColor: Colors.grey[300],
         title: Center(
           child: Text(
-            'MEDICAMENTOS',
+            'Borrar',
             style: TextStyle(
               fontSize: 24,
               color: Colors.pink,
@@ -79,6 +83,12 @@ class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                 ),
+              ),
+              trailing: ElevatedButton(
+                onPressed: () {
+                  _borrarMedicamento(medicamentosAReponer[index]['id']); // Chama a função para excluir o medicamento
+                },
+                child: Text('Borrar'),
               ),
             );
           },
