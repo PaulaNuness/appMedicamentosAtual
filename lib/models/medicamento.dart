@@ -26,4 +26,16 @@ class Medicamento {
       'horarios': horarios.join(','), // Convertendo a lista para uma string
     };
   }
+
+    // Método para criar um objeto Medicamento a partir de um mapa
+  factory Medicamento.fromMap(Map<String, dynamic> map) {
+    return Medicamento(
+      nome: map['nome'],
+      quantidade: map['quantidade'],
+      unidadeTempo: map['unidadeTempo'],
+      quantidadeEnvase: map['quantidadeEnvase'],
+      recomendacoes: map['recomendacoes'],
+      horarios: (map['horarios'] as String).split(','), // Convertendo a string de volta para uma lista
+    );
+  }
 }

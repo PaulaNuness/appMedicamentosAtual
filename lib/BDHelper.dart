@@ -1,3 +1,4 @@
+import 'package:flutter1/models/medicamento.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
