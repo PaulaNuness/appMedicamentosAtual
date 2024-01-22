@@ -181,15 +181,19 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                     ),
                                   );
                                 },
-                                style: ElevatedButton.styleFrom(
-                                  primary:
-                                      const Color.fromARGB(255, 164, 216, 240),
-                                  padding: EdgeInsets.all(16.0),
-                                ),
+                               style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 233, 83, 208),
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
+                  ),
                                 child: Text(
                                   'Añadir Medicamientos',
                                   style: TextStyle(
-                                    color: Color.fromARGB(255, 33, 33, 214),
+                                    color: Color.fromARGB(255, 227, 227, 235),
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Sans-serif',
@@ -221,14 +225,18 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary:
-                                      const Color.fromARGB(255, 164, 216, 240),
-                                  padding: EdgeInsets.all(16.0),
-                                ),
+                    primary: Color.fromARGB(255, 233, 83, 208),
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
+                  ),
                                 child: Text(
                                   'Agenda Medicamientos',
                                   style: TextStyle(
-                                    color: Color.fromARGB(255, 33, 33, 214),
+                                    color: Color.fromARGB(255, 227, 227, 235),
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Sans-serif',
@@ -253,15 +261,19 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                   // Navegar para a tela Borrar Medicamientos
                                   print('Botão 3 pressionado!');
                                 },
-                                style: ElevatedButton.styleFrom(
-                                  primary:
-                                      const Color.fromARGB(255, 164, 216, 240),
-                                  padding: EdgeInsets.all(16.0),
-                                ),
+                               style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 233, 83, 208),
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
+                  ),
                                 child: Text(
                                   'Borrar Medicamientos',
                                   style: TextStyle(
-                                    color: Color.fromARGB(255, 33, 33, 214),
+                                    color: Color.fromARGB(255, 227, 227, 235),
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Sans-serif',
@@ -292,15 +304,19 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                     ),
                                   );
                                 },
-                                style: ElevatedButton.styleFrom(
-                                  primary:
-                                      const Color.fromARGB(255, 164, 216, 240),
-                                  padding: EdgeInsets.all(16.0),
-                                ),
+                               style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 233, 83, 208),
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
+                  ),
                                 child: Text(
                                   'Lista Medicamientos',
                                   style: TextStyle(
-                                    color: Color.fromARGB(255, 33, 33, 214),
+                                    color: Color.fromARGB(255, 227, 227, 235),
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Sans-serif',
@@ -338,9 +354,14 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                   );
                                 },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.pink,
-                      padding: EdgeInsets.all(16.0),
+                    primary: Color.fromARGB(255, 152, 177, 233),
+                    padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
                     ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
+                  ),
                     child: Text(
                       'Salir',
                       style: TextStyle(
