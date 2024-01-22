@@ -59,12 +59,12 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
             children: [
               DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 248, 228, 235),
+                  color: Color.fromARGB(255, 233, 83, 208),
                 ),
                 child: Text(
                   'Menu',
                   style: TextStyle(
-                    color: Colors.pink,
+                    color:  Colors.white,
                     fontSize: 24,
                   ),
                 ),
