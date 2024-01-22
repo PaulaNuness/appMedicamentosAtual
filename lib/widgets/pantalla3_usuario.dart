@@ -3,6 +3,8 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
 import 'package:flutter1/widgets/pantalla4_anadir.dart';
 import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
 import 'package:flutter1/widgets/pantalla6_agenda_medicamientos.dart';
+import 'package:flutter1/widgets/pantalla7_borrar_medicamento.dart';
+
 
 class Pantalla3_usuario extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
     Pantalla1_Inicio(),
     Pantalla4_Anadir(),
     AgendaMedicamentos(),
+    pantalla7_borrar_medicamiento(),
     pantalla5_lista_medicamientos(),
   ];
 
@@ -99,7 +102,13 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
               ListTile(
                 title: Text('BORRAR'),
                 onTap: () {
-                  // Navegar para a tela Borrar de medicamientos
+                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => pantalla7_borrar_medicamiento(),
+                    ),
+                  );
                 },
               ),
 
@@ -220,7 +229,7 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          AgendaMedicamentos(),
+                                          pantalla7_borrar_medicamiento(),
                                     ),
                                   );
                                 },
@@ -257,9 +266,14 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
                                 ],
                               ),
                               child: ElevatedButton(
-                                onPressed: () {
-                                  // Navegar para a tela Borrar Medicamientos
-                                  print('Botão 3 pressionado!');
+                                  onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          pantalla5_lista_medicamientos(),
+                                    ),
+                                  );
                                 },
                                style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 233, 83, 208),

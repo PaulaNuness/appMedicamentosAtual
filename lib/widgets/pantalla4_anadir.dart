@@ -206,7 +206,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.pink,
+                        primary:Color.fromARGB(255, 233, 83, 208),
                         padding: EdgeInsets.all(16.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -225,7 +225,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                       onPressed: () {
                         _guardarEnBaseDatos();
                       },
-                      backgroundColor: Colors.pink,
+                      backgroundColor: Color.fromARGB(255, 233, 83, 208),
                       child: Icon(Icons.add),
                     ),
                   ],
