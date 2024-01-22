@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter1/BDHelper.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:flutter1/widgets/pantalla3_usuario.dart';
 
 class pantalla5_lista_medicamientos extends StatefulWidget {
   @override
@@ -30,6 +30,7 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
+        automaticallyImplyLeading: false, // Remover a seta de voltar
         title: Center(
           child: Text(
             'MEDICAMENTOS',
@@ -60,7 +61,7 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
               leading: CircleAvatar(
                 backgroundColor: Color.fromARGB(255, 233, 83, 208),
                 child: Text(
-                  '${medicamentosAReponer[index]['quantidade']}',  // Ajuste conforme a estrutura real do seu banco de dados
+                  '${medicamentosAReponer[index]['quantidade']}',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -68,14 +69,14 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
                 ),
               ),
               title: Text(
-                medicamentosAReponer[index]['nome'],  // Ajuste conforme a estrutura real do seu banco de dados
+                medicamentosAReponer[index]['nome'],
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
-                'Quantidade restante: ${medicamentosAReponer[index]['quantidade']}',  // Ajuste conforme a estrutura real do seu banco de dados
+                'Quantidade restante: ${medicamentosAReponer[index]['quantidade']}',
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                 ),
@@ -89,6 +90,35 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
               },
             );
           },
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.all(10.0),
+        child: ElevatedButton(
+          onPressed: () {
+                                    // Voltar para a tela de usuário
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pantalla3_usuario(),
+                          ),
+                        );
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 233, 83, 208),
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+          child: Text(
+            'Sair',
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );
