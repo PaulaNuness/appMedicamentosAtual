@@ -12,11 +12,6 @@ class Medicamento {
   Medicamento({required this.nombre, required this.horaProxima});
 }
 
-class AgendaMedicamentos extends StatefulWidget {
-  @override
-  _AgendaMedicamentosState createState() => _AgendaMedicamentosState();
-}
-
 class VisitaMedico {
   String nomeMedico;
   DateTime dataVisita;
@@ -24,11 +19,15 @@ class VisitaMedico {
   VisitaMedico({required this.nomeMedico, required this.dataVisita});
 }
 
+class AgendaMedicamentos extends StatefulWidget {
+  @override
+  _AgendaMedicamentosState createState() => _AgendaMedicamentosState();
+}
+
 class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   int _selectedIndex = 0;
   late Timer _timer;
 
-  // Lista de páginas correspondentes a cada índice do BottomNavigationBar
   final List<Widget> _pages = [
     Pantalla1_Inicio(),
     Pantalla4_Anadir(),
@@ -39,31 +38,20 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   List<VisitaMedico> visitasMedicas = [
     VisitaMedico(nomeMedico: 'Dr. Silva', dataVisita: DateTime.now().add(Duration(days: 7))),
     VisitaMedico(nomeMedico: 'Dra. Santos', dataVisita: DateTime.now().add(Duration(days: 14))),
-    // Adicione mais visitas conforme necessário
   ];
 
   List<Medicamento> medicamentos = [
-    Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2)),),
+    Medicamento(nombre: 'Paracetamol', horaProxima: DateTime.now().add(Duration(hours: 2))),
     Medicamento(nombre: 'Ibuprofeno', horaProxima: DateTime.now().add(Duration(hours: 14))),
-    Medicamento(nombre: 'Amoxicilina', horaProxima: DateTime.now().add(Duration(hours: 6))),
-    Medicamento(nombre: 'Diclofenaco', horaProxima: DateTime.now().add(Duration(hours: 12))),
-    Medicamento(nombre: 'Diazepam', horaProxima: DateTime.now().add(Duration(hours: 4))),
-    Medicamento(nombre: 'Omeprazol', horaProxima: DateTime.now().add(Duration(hours: 16))),
-    Medicamento(nombre: 'Aspirina C', horaProxima: DateTime.now().add(Duration(hours: 2))),
-    Medicamento(nombre: 'Nolotil', horaProxima: DateTime.now().add(Duration(hours: 4))),
-    Medicamento(nombre: 'Acomicil', horaProxima: DateTime.now().add(Duration(hours: 6))),
-    Medicamento(nombre: 'Orfidal', horaProxima: DateTime.now().add(Duration(hours: 6))),
+    // Adicione mais medicamentos conforme necessário
   ];
 
   @override
   void initState() {
     super.initState();
-    // Ordenar a lista de medicamentos pelos horários
     medicamentos.sort((a, b) => a.horaProxima.compareTo(b.horaProxima));
-    // Iniciar a atualização do tempo restante
     _timer = Timer.periodic(Duration(minutes: 1), (timer) {
       setState(() {
-        // Actualizar el tiempo restante cada minuto
         for (var medicamento in medicamentos) {
           medicamento.horaProxima = medicamento.horaProxima.subtract(Duration(minutes: 1));
         }
@@ -73,7 +61,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
 
   @override
   void dispose() {
-    _timer.cancel(); // Cancelar o timer no dispose para evitar setState após descarte
+    _timer.cancel();
     super.dispose();
   }
 
@@ -81,7 +69,8 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[300], // Cor de fundo cinza
+        automaticallyImplyLeading: false, // Impede a exibição do botão de voltar
+        backgroundColor: Colors.grey[300],
         title: Center(
           child: Text(
             'Medicamientos/Horario ',
@@ -98,7 +87,6 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Lista de medicamentos
           Expanded(
             child: ListView.builder(
               itemCount: medicamentos.length,
@@ -170,8 +158,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
               },
             ),
           ),
-          SizedBox(height: 50), // Espaçamento entre as listas
-          // Tabela de visitas ao médico
+          SizedBox(height: 50),
           Text(
             'Próximas Visitas ao Médico:',
             style: TextStyle(
@@ -180,10 +167,10 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
             ),
           ),
           Container(
-            alignment: Alignment.center, // Centralizar a tabela
+            alignment: Alignment.center,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.pink), // Adicionar borda
-              borderRadius: BorderRadius.all(Radius.circular(30.0)), // Opcional: Adicionar bordas arredondadas
+              border: Border.all(color: Colors.pink),
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
             ),
             child: DataTable(
               columns: [
@@ -198,8 +185,31 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
               }).toList(),
             ),
           ),
-          SizedBox(height: 50)
+          SizedBox(height: 50),
         ],
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.all(10.0),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 233, 83, 208),
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+          child: Text(
+            'Sair',
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }
