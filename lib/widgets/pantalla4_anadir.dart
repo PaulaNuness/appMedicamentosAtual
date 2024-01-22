@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter1/BDHelper.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter1/BDHelper.dart';
+import 'package:flutter1/widgets/pantalla3_usuario.dart';
+
 class Pantalla4_Anadir extends StatefulWidget {
   @override
   _Pantalla4AnadirState createState() => _Pantalla4AnadirState();
@@ -193,8 +197,13 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        // Verifica e salva na base de dados
-                        _guardarEnBaseDatos();
+                        // Voltar para a tela de usuário
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pantalla3_usuario(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.pink,
@@ -214,7 +223,6 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                     ),
                     FloatingActionButton(
                       onPressed: () {
-                        // Adicione aqui a lógica para salvar na base de dados
                         _guardarEnBaseDatos();
                       },
                       backgroundColor: Colors.pink,
