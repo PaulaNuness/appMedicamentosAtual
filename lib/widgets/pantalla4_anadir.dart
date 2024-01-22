@@ -248,13 +248,13 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Campos Inválidos"),
-            content: Text("Por favor, preencha todos os campos corretamente."),
+            content: Text("Por favor, preencha todos os campos corretamente.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,)),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("OK"),
+                child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,),),
               ),
             ],
           );
@@ -287,7 +287,7 @@ class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("OK"),
+                child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,),),
               ),
             ],
           );

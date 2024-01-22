@@ -87,6 +87,7 @@ class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
               //definición de un elemento de lista (ListTile) en el menú lateral (Drawer)
               ListTile(
                 title: Text('AGENDA'),
+                
                 onTap: () {
                   // Navegar para a tela Agenda de medicamientos
                   Navigator.push(

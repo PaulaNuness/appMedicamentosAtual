@@ -76,8 +76,8 @@ class CargadorTema with ChangeNotifier {
             onSurface: Colors.black,// Color del texto sobre la superficie
             brightness: Brightness.light, // Brillo del tema claro
             error: Color(0xFFFF6E40),
-            onError: Color.fromARGB(255, 152, 177, 233),
-            tertiary: Color.fromARGB(255, 152, 177, 233),
+            onError:Colors.black,
+            tertiary:Colors.black,
             onTertiary:Colors.black,
           ),
         )

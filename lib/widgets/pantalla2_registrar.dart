@@ -44,8 +44,11 @@ class _Pantalla2_RegistrarState extends State<Pantalla2_Registrar> {
                   children: [
                     Text(
                       'Nombre',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),
+                      
                     ),
+                    
                     SizedBox(height: 4),
                     Container(
                       width: 250,
@@ -64,7 +67,8 @@ class _Pantalla2_RegistrarState extends State<Pantalla2_Registrar> {
                   children: [
                     Text(
                       'Contraseña',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),
                     ),
                     SizedBox(height: 4),
                     Container(
@@ -93,7 +97,8 @@ class _Pantalla2_RegistrarState extends State<Pantalla2_Registrar> {
                   children: [
                     Text(
                       'Fecha Nacimiento',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),
                     ),
                     SizedBox(height: 4),
                     Container(
@@ -121,7 +126,8 @@ class _Pantalla2_RegistrarState extends State<Pantalla2_Registrar> {
                   children: [
                     Text(
                       'Sexo',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),
                     ),
                     SizedBox(height: 4),
                     Container(
@@ -213,14 +219,14 @@ class _Pantalla2_RegistrarState extends State<Pantalla2_Registrar> {
                                 return AlertDialog(
                                   title: Text("Error"),
                                   content: Text(
-                                    "Por favor, complete todos los campos.",
+                                    "Por favor, complete todos los campos.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,)
                                   ),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text("OK"),
+                                      child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,),)
                                     ),
                                   ],
                                 );

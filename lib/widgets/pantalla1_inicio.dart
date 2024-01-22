@@ -53,7 +53,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                 children: [
                   Text(
                     'Usuário',
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),
                   ),
                   SizedBox(height: 8),
                   Container(
@@ -71,7 +72,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                 children: [
                   Text(
                     'Contraseña',
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),
                   ),
                   SizedBox(height: 8),
                   Container(
@@ -109,13 +111,17 @@ class Pantalla1_Inicio extends StatelessWidget {
                           return AlertDialog(
                             title: Text("Erro"),
                             content: Text(
-                                "Por favor, preencha o usuário e a senha."),
+                                "Por favor, preencha o usuário e a senha.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("OK"),
+                                child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+              color: Colors.pink, // Defina a cor desejada (pink, neste caso)
+            ),),
+                                
                               ),
                             ],
                           );
@@ -131,13 +137,17 @@ class Pantalla1_Inicio extends StatelessWidget {
                           return AlertDialog(
                             title: Text("Erro"),
                             content:
-                                Text("Por favor, preencha o campo de usuário."),
+                                Text("Por favor, preencha o campo de usuário.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("OK"),
+                                child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+              color: Colors.pink, // Defina a cor desejada (pink, neste caso)
+            ),),
+                                
                               ),
                             ],
                           );
@@ -153,13 +163,16 @@ class Pantalla1_Inicio extends StatelessWidget {
                           return AlertDialog(
                             title: Text("Erro"),
                             content:
-                                Text("Por favor, preencha o campo de senha."),
+                                Text("Por favor, preencha o campo de senha.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                            fontFamily: 'Sans-serif',),),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("OK"),
+                                child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,
+                            fontFamily: 'Sans-serif',),),
+                                
                               ),
                             ],
                           );
@@ -187,13 +200,13 @@ class Pantalla1_Inicio extends StatelessWidget {
                           return AlertDialog(
                             title: Text("Erro de Autenticação"),
                             content: Text(
-                                "Credenciais incorretas. Tente novamente."),
+                                "Credenciais incorretas. Tente novamente.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,)),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("OK"),
+                                child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,),)
                               ),
                             ],
                           );
