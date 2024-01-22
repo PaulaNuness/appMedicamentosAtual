@@ -55,6 +55,15 @@ class BDHelper{
     return resultado;
   }
 
+
+  // Consultar a tabela 'Medicamento' na base de dados
+  Future<List<Map<String, dynamic>>> consultarMedicamentos() async {
+    Database? bd = await baseDatos;
+    var resultado = await bd!.query('Medicamento');
+    return resultado;
+  }
+
+
   
 
   _inicializarBD() async{//é um método privado que é chamado internamente para inicializar o banco de dados SQLite

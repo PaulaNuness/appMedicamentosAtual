@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter1/BDHelper.dart';
+import 'package:sqflite/sqflite.dart';
 
 class pantalla5_lista_medicamientos extends StatefulWidget {
   @override
   _MedicamentosScreenState createState() => _MedicamentosScreenState();
 }
 
-
 class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
-  List<String> medicamentosAReponer = [
-    'PARACETAMOL',
-    'IBUPROFENO',
-    'AMOXICILINA',
-    'OMEPRAZOL',
-    'ASPIRINA C',
-    'NOLOTIL',
-    'DICLOFENACO',
-    'ENALAPRIL',
-    'AZITROMICINA',
-    'METAMIZOL'
-  ];
-  List<int> quantidadesDisponiveis = [10, 5, 8, 5, 2,1, 5, 8, 13, 20];
-  
+  BDHelper bdHelper = BDHelper();
+  List<Map<String, dynamic>> medicamentosAReponer = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _carregarMedicamentos();
+  }
+
+  Future<void> _carregarMedicamentos() async {
+    List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos();
+
+    setState(() {
+      medicamentosAReponer = medicamentos;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
       body: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.pink,
+            color: Color.fromARGB(255, 233, 83, 208),
             width: 2.0,
           ),
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -56,9 +58,9 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
           itemBuilder: (context, index) {
             return ListTile(
               leading: CircleAvatar(
-                backgroundColor: Colors.pink,
+                backgroundColor: Color.fromARGB(255, 233, 83, 208),
                 child: Text(
-                  '${quantidadesDisponiveis[index]}',
+                  '${medicamentosAReponer[index]['quantidade']}',  // Ajuste conforme a estrutura real do seu banco de dados
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -66,14 +68,14 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
                 ),
               ),
               title: Text(
-                medicamentosAReponer[index],
+                medicamentosAReponer[index]['nome'],  // Ajuste conforme a estrutura real do seu banco de dados
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
-                'Quantidade restante: ${quantidadesDisponiveis[index]}',
+                'Quantidade restante: ${medicamentosAReponer[index]['quantidade']}',  // Ajuste conforme a estrutura real do seu banco de dados
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                 ),
@@ -89,12 +91,12 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
           },
         ),
       ),
-     endDrawer: Drawer(
+      endDrawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.pink,
+                color:  Color.fromARGB(255, 233, 83, 208),
               ),
               child: Center(
                 child: Text(
@@ -136,11 +138,10 @@ class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
   }
 }
 
-
 class FarmaciasScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> farmacias = [//lista con la ubicacion de las farmacia
+    List<String> farmacias = [
       'Calle de la Salud 31, 47011, Valladolid',
       '47 Calle Soto, 47010, Valladolid',
       'Calle de la Cebadería 3, 47001, Valladolid',
@@ -166,7 +167,7 @@ class FarmaciasScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.pink,
+            color: Color.fromARGB(255, 233, 83, 208),
             width: 2.0,
           ),
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -182,8 +183,8 @@ class FarmaciasScreen extends StatelessWidget {
                 children: [
                   Text(farmacias[index]),
                   Icon(
-                    Icons.location_on, // Ícone de localização (você pode escolher outro ícone)
-                    color: Colors.pink,
+                    Icons.location_on,
+                    color:  Color.fromARGB(255, 233, 83, 208),
                   ),
                 ],
               ),
