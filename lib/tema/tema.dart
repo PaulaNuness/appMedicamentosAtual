@@ -78,7 +78,7 @@ class CargadorTema with ChangeNotifier {
             error: Color(0xFFFF6E40),
             onError: Color.fromARGB(255, 152, 177, 233),
             tertiary: Color.fromARGB(255, 152, 177, 233),
-            onTertiary:Color.fromARGB(255, 152, 177, 233),
+            onTertiary:Colors.black,
           ),
         )
       );
@@ -90,7 +90,7 @@ class CargadorTema with ChangeNotifier {
             secondary: Color.fromARGB(255, 45, 52, 151), // Color secundario para el tema oscuro
             background: Color(0xFF121212), // Color de fondo para el tema oscuro
             surface: Color(0xFF1E1E1E), // Color de la superficie para el tema oscuro
-            onPrimary: Colors.white, // Color del texto sobre el color primario en el tema oscuro
+            onPrimary: Colors.black, // Color del texto sobre el color primario en el tema oscuro
             onSecondary: Colors.black, // Color del texto sobre el color secundario en el tema oscuro
             onBackground: Colors.white, // Color del texto sobre el fondo en el tema oscuro
             onSurface: Colors.white, // Color del texto sobre la superficie en el tema oscuro
@@ -98,7 +98,7 @@ class CargadorTema with ChangeNotifier {
             error: Color(0xFFFF5252), 
             onError: Color(0xFF212121),
             tertiary: Colors.black,
-            onTertiary:Colors.grey,
+            onTertiary:Colors.black,
             ),
       )
     );
