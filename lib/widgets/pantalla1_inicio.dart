@@ -180,13 +180,18 @@ class Pantalla1_Inicio extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 164, 216, 240),
+                    primary: Color.fromARGB(255, 233, 83, 208),
                     padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
                   ),
                   child: Text(
                     'ENTRAR',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 33, 33, 214),
+                      color: Color.fromARGB(255, 227, 227, 235),
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Sans-serif',
@@ -216,13 +221,18 @@ class Pantalla1_Inicio extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 164, 216, 240),
+                    primary: Color.fromARGB(255, 233, 83, 208),
                     padding: EdgeInsets.all(16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                    ),
+                    elevation: 6.0,
+                    shadowColor: Color.fromARGB(255, 33, 33, 214),
                   ),
                   child: Text(
                     'REGISTRAR',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 33, 33, 214),
+                      color: Color.fromARGB(255, 227, 227, 235),
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Sans-serif',
