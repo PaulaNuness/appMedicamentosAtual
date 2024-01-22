@@ -82,50 +82,56 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: ListView.builder(
-  itemCount: medicamentosAReponer.length,
-  itemBuilder: (context, index) {
-    var medicamento = medicamentosAReponer[index];
+            child: Expanded(
+  child: ListView.builder(
+    itemCount: medicamentosAReponer.length,
+    itemBuilder: (context, index) {
+      var medicamento = medicamentosAReponer[index];
 
-    return Card(
-      elevation: 5,
-      margin: EdgeInsets.all(10),
-      child: ListTile(
-        title: Text(
-          medicamento['nome'],
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+      return Card(
+        elevation: 5,
+        margin: EdgeInsets.all(10),
+        child: ListTile(
+          title: Text(
+            medicamento['nome'],
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            'Horarios: ${medicamento['horarios']}',
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Lógica para o primeiro botão
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 152, 177, 233),
+                ),
+                child: Text('SI'),
+              ),
+              SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: () {
+                  // Lógica para o segundo botão
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                ),
+                child: Text('NO'),
+              ),
+            ],
           ),
         ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                // Lógica para o primeiro botão
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 152, 177, 233),
-              ),
-              child: Text('SI'),
-            ),
-            SizedBox(width: 8),
-            ElevatedButton(
-              onPressed: () {
-                // Lógica para o segundo botão
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-              ),
-              child: Text('NO'),
-            ),
-          ],
-        ),
-      ),
-    );
-  },
+      );
+    },
+  ),
 ),
+
 
           ),
           SizedBox(height: 50),
