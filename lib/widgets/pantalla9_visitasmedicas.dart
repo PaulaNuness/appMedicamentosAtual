@@ -13,6 +13,11 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
   VisitaMedica visitaMedica = new VisitaMedica();
   final _formKey = GlobalKey<FormState>();
   BDHelper bdHelper = BDHelper();
+    String? selectedConsulta;
+    String? selectedDoctor;
+    String? selectedFecha;
+    String? selectedHora;
+
 
   @override
   Widget build(BuildContext context) {
@@ -213,9 +218,13 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
                   ],
                 ),
                 SizedBox(height: 60),
+                
                 ElevatedButton(
+                  
                   onPressed: () {
+                    
                     if (_formKey.currentState!.validate()) {
+                      
                       _formKey.currentState!.save();
                       bdHelper.insertarBD('VisitaMedica', visitaMedica.toMap());
                       Navigator.pop(context);

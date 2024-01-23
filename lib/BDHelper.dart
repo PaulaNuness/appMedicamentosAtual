@@ -110,6 +110,10 @@
           await db.execute(
             "CREATE TABLE if not exists Medicamento(id INTEGER PRIMARY KEY, nome TEXT,quantidade INTEGER, unidadeTempo TEXT,quantidadeEnvase INTEGER,recomendacoes TEXT,horarios TEXT  )"
           );
+          //para añadir una teceratabla
+          await db.execute(
+            "CREATE TABLE if not exists VisitaMedica(id INTEGER PRIMARY KEY, especialidad TEXT, doctor TEXT, fecha TEXT,hora TEXT  )"
+          );
         }
         );
       return baseDatos;
