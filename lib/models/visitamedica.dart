@@ -6,7 +6,9 @@ class VisitaMedica{
   int? _id;
   late String _especialidad;
   late String _doctor;
-  late String _fecha;
+  late String _lugar;
+  late DateTime _fecha;
+  late String _dia;
   late String _hora;
 
   //Constructor de la clase
@@ -15,26 +17,32 @@ class VisitaMedica{
     this._id = 0;
     this._especialidad = '';
     this._doctor = '';
-    this._fecha = '';
-    this._hora = '';
+    this._lugar = '';
+    this._fecha = DateTime.now();
+    this._dia=this._fecha.day.toString()+'/'+this._fecha.month.toString()+'/'+this._fecha.year.toString();
+    this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
   }
   
   //Constructores con parametros
-  VisitaMedica.withOutId(String especialidad, String doctor, String fecha, String hora)
+  VisitaMedica.withOutId(String especialidad, String doctor, String lugar, DateTime fecha)
   {
     this._especialidad = especialidad;
     this._doctor = doctor;
+    this._lugar = lugar;
     this._fecha = fecha;
-    this._hora = hora;
+    this._dia=this._fecha.day.toString()+'/'+this._fecha.month.toString()+'/'+this._fecha.year.toString();
+    this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
   }
   
-  VisitaMedica.withId(int id, String especialidad, String doctor, String fecha, String hora)
+  VisitaMedica.withId(int id, String especialidad, String doctor, String lugar, DateTime fecha)
   {
     this._id = id;
     this._especialidad = especialidad;
     this._doctor = doctor;
+    this._lugar = lugar;
     this._fecha = fecha;
-    this._hora = hora;
+    this._dia=this._fecha.day.toString()+'/'+this._fecha.month.toString()+'/'+this._fecha.year.toString();
+    this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
   }
 
   VisitaMedica.fromMap(dynamic obj)
@@ -42,8 +50,10 @@ class VisitaMedica{
     this._id = obj['id'];
     this._especialidad = obj['especialidad'];
     this._doctor = obj['doctor'];
-    this._fecha = obj['fecha'];
-    this._hora = obj['hora'];
+    this._lugar = obj['lugar'];
+    this._fecha = DateTime.parse(obj['fecha']);
+    this._dia=this._fecha.day.toString()+'/'+this._fecha.month.toString()+'/'+this._fecha.year.toString();
+    this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
 
   }
 
@@ -51,7 +61,9 @@ class VisitaMedica{
   int? get id => _id;
   String get especialidad => _especialidad;
   String get doctor => _doctor;
-  String get fecha => _fecha;
+  String get lugar => _lugar;
+  DateTime get fecha => _fecha;
+  String get dia => _dia;
   String get hora => _hora;
   
   //Setters
@@ -63,17 +75,32 @@ class VisitaMedica{
   {
     this._doctor = doctor;
   }
-
-  set fecha(String fecha)
+  set lugar(String lugar)
+  {
+    this._lugar = lugar;
+  }
+  set fecha(DateTime fecha)
   {
     this._fecha = fecha;
-
+    this._dia=this._fecha.day.toString()+'/'+this._fecha.month.toString()+'/'+this._fecha.year.toString();
+    this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
   }
-
+  set dia(String dia)
+  {
+    this._dia = dia;
+    List<String> partes = dia.split("/");
+    int dd = int.tryParse(partes[0])!;
+    int mm = int.tryParse(partes[1])!;
+    int yyyy = int.tryParse(partes[2])!;
+    this._fecha = new DateTime(yyyy, mm, dd, this._fecha.hour, this._fecha.minute);
+  }
   set hora(String hora)
   {
     this._hora = hora;
-
+    List<String> partes = hora.split(":");
+    int horas = int.tryParse(partes[0])!;
+    int minutos = int.tryParse(partes[1])!;
+    this.fecha = new DateTime(this._fecha.year, this._fecha.month, this._fecha.day, horas, minutos);
   }
 
   Future<List<VisitaMedica>> GeTProximasVisitas(bool modoLocal)
@@ -138,6 +165,7 @@ class VisitaMedica{
     }
     map['especialidad'] = _especialidad;
     map['doctor'] = _doctor;
+    map['lugar'] = _lugar;
     map['fecha'] = _fecha.toString();
     return map;
   }
