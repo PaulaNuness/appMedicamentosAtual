@@ -172,30 +172,29 @@
                   ),
                   SizedBox(height: 30),
                   
-                                          ElevatedButton(
-                                            
-                                  onPressed: () {
-                                      Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PaginaVisitaMedica(),
-                                    ),
-                                  );
-        
-            
-                                  },
-                                  
-                                  style: ElevatedButton.styleFrom(
-                                    
-                                    padding: EdgeInsets.all(30.0),
-                                    elevation: 6.0,
-                                    shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
-                        ),
-                                    primary: Color.fromARGB(255, 233, 83, 208),
-                                  ),
-                                  child: Text('MARCAR CONSULTAS(Visitas Medicas)'),
-                                ),
+       Align(
+  alignment: Alignment.bottomCenter,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PaginaVisitaMedica(),
+        ),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      padding: EdgeInsets.all(30.0),
+      elevation: 6.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      primary: Color.fromARGB(255, 233, 83, 208),
+    ),
+    child: Text('MARCAR CONSULTAS(Visitas Medicas)'),
+  ),
+)
+,
                   SizedBox(height: 30),
                   Text(
                     'Próximas Visitas ao Médico:',
