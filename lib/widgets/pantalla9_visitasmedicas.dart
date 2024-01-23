@@ -1,261 +1,404 @@
+    import 'package:flutter/material.dart';
+    import 'package:flutter1/BDHelper.dart';
+    import 'package:flutter1/models/usuario.dart';
+    import 'package:flutter1/widgets/Registro_hecho.dart';
 
-  import 'package:flutter/material.dart';
-  import 'package:flutter1/BDHelper.dart';
-  import 'package:flutter1/widgets/pantalla3_usuario.dart';
+    class Pantalla9_VisitasMedicas extends StatefulWidget {
+      @override
+      _Pantalla9_VisitasMedicasState createState() => _Pantalla9_VisitasMedicasState();
+    }
 
-  import 'package:flutter/material.dart';
-  import 'package:flutter1/BDHelper.dart';
-  import 'package:flutter1/widgets/pantalla3_usuario.dart';
+    class _Pantalla9_VisitasMedicasState extends State<Pantalla9_VisitasMedicas> {
+      BDHelper bdHelper = BDHelper();
 
-  class Pantalla9_visitasmedicas extends StatefulWidget {
-    @override
-    _Pantalla9_visitasmedicasState createState() => _Pantalla9_visitasmedicasState();
-  }
+      TextEditingController especialidadController = TextEditingController();
+      TextEditingController doctorController = TextEditingController();
+      TextEditingController fechaController = TextEditingController();
+      TextEditingController horaController = TextEditingController();
 
-  class _Pantalla9_visitasmedicasState extends State<Pantalla9_visitasmedicas> {
-    BDHelper bdHelper = BDHelper();
-
-    String? selectedEsecialidad;
-    String? selectedDoctor;
-    String? selectedFecha;
-    String? selectedHora;
-
-
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            width: 350,
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3),
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          home: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.grey[300],
+              title: Center(
+                child: Text(
+                  'Hola, bienvenido.',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.pink,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontFamily: 'Arial',
+                  ),
                 ),
-              ],
+              ),
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  DropdownButton<String>(
-                    isExpanded: true,
-                    value: selectedEsecialidad,
-                    items: <String>[
-                      'PARACETAMOL',
-                      'IBUPROFENO',
-                      'AMOXICILINA',
-                      'OMEPRAZOL',
-                      'ASPIRINA C',
-                      'NOLOTIL',
-                      'DIAZEPAM'
-                    ].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedEsecialidad = newValue;
-                      });
-                    },
-                    hint: Text('SELECCIONAR ESPECIALIDAD'),
-                  ),
-                  SizedBox(height: 20),
-                  DropdownButton<String>(
-                    isExpanded: true,
-                    value: selectedDoctor,
-                    items: List.generate(31, (index) => (index + 1).toString())
-                        .map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedDoctor = newValue;
-                      });
-                    },
-                    hint: Text('SELECCIONAR DOCTOR'),
-                  ),
-                  SizedBox(height: 10),
-                  DropdownButton<String>(
-                    isExpanded: true,
-                    value: selectedFecha,
-                    items: ['DÍAS', 'MESES', 'AÑOS']
-                        .map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        })
-                        .toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedFecha = newValue;
-                      });
-                    },
-                    hint: Text('SELECCIONAR FECHA'),
-                  ),
-                  SizedBox(height: 20),
-                  DropdownButton<String>(
-                    isExpanded: true,
-                    value: selectedHora,
-                    items: List.generate(30, (index) => (index + 1).toString())
-                        .map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedHora = newValue;
-                      });
-                    },
-                    hint: Text('SELECIONAR HORA'),
-                  ),
-                  SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          // Voltar para a tela de usuário
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Pantalla3_usuario(),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary:Color.fromARGB(255, 233, 83, 208),
-                          padding: EdgeInsets.all(16.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+            body: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        Text(
+                          'Nombre',
+                          style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                                fontFamily: 'Sans-serif',),
+                          
+                        ),
+                        
+                        SizedBox(height: 4),
+                        Container(
+                          width: 250,
+                          height: 40,
+                          color: Colors.grey[300],
+                          child: TextField(
+                            controller: especialidadController,
                           ),
                         ),
-                        child: Text(
-                          'OK',
+                      ],
+                    ),
+
+                    SizedBox(height: 30),
+
+                    Column(
+                      children: [
+                        Text(
+                          'Contraseña',
+                          style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                                fontFamily: 'Sans-serif',),
+                        ),
+                        SizedBox(height: 4),
+                        Container(
+                          width: 250,
+                          height: 40,
+                          color: Colors.grey[300],
+                          child: TextField(
+                            controller: doctorController,
+                            obscureText: true,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'La contraseña debe contener solo números y letras.',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 21,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.grey,
                           ),
                         ),
+                      ],
+                    ),
+
+                    SizedBox(height: 30),
+
+                    Column(
+                      children: [
+                        Text(
+                          'Fecha Nacimiento',
+                          style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                                fontFamily: 'Sans-serif',),
+                        ),
+                        SizedBox(height: 4),
+                        Container(
+                          width: 250,
+                          height: 40,
+                          color: Colors.grey[300],
+                          child: TextField(
+                            controller: fechaController,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Formato: 00/00/0000',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 30),
+
+                    Column(
+                      children: [
+                        Text(
+                          'Sexo',
+                          style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,
+                                fontFamily: 'Sans-serif',),
+                        ),
+                        SizedBox(height: 4),
+                        Container(
+                          width: 250,
+                          height: 40,
+                          color: Colors.grey[300],
+                          child: TextField(
+                            controller: horaController,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        if (!_isSexValid(horaController.text))
+                        Text(
+                          'Formato: Hombre o Mujer',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 90),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: 150,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 33, 33, 214),
+                                offset: Offset(0.0, 8.0),
+                                blurRadius: 12.0,
+                              ),
+                            ],
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 233, 83, 208),
+                        padding: EdgeInsets.all(16.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                        ),
+                        elevation: 6.0,
+                        shadowColor: Color.fromARGB(255, 33, 33, 214),
                       ),
-                      FloatingActionButton(
-                        onPressed: () {
-                          _guardarEnBaseDatos();
-                        },
-                        backgroundColor: Color.fromARGB(255, 233, 83, 208),
-                        child: Icon(Icons.add),
+                            child: Text(
+                              'SALIR',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 227, 227, 235),
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Sans-serif',
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 150,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 33, 33, 214),
+                                offset: Offset(0.0, 8.0),
+                                blurRadius: 12.0,
+                              ),
+                            ],
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              String nombre = especialidadController.text;
+                              String contrasena = doctorController.text;
+                              String fechaNacimiento =
+                                  fechaController.text;
+                              String sexo = horaController.text;
+
+                              if (nombre.isEmpty ||
+                                  contrasena.isEmpty ||
+                                  fechaNacimiento.isEmpty ||
+                                  sexo.isEmpty) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text(
+                                        "Por favor, complete todos los campos.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,),)
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return;
+                              }
+
+                              if (!_isDateValid(fechaController.text) ||
+                                  !_isMonthValid(fechaController.text) ||
+                                  !_isYearValid(fechaController.text)) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text(
+                                        "Fecha de nacimiento no válida.",
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return;
+                              }
+
+                              if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(contrasena)) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text(
+                                        "La contraseña debe contener solo números y letras.",
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return;
+                              }
+
+                              if (!_isSexValid(sexo)) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text(
+                                        'Sexo no válido. Utilice "hombre", "mujer"',
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return;
+                              }
+
+                              Usuario usuario = Usuario.withoutId(
+                                nombre,
+                                contrasena,
+                                fechaNacimiento,
+                                sexo,
+                              );
+
+                              int resultado = await bdHelper.insertarBD(
+                                'Usuario',
+                                usuario.toMap(),
+                              );
+
+                              if (resultado > 0) {
+                                print('Datos insertados con éxito:');
+                                print('ID: ${usuario.id}');
+                                print('Nombre: $nombre');
+                                print('Contraseña: $contrasena');
+                                print('Fecha de Nacimiento: $fechaNacimiento');
+                                print('Sexo: $sexo');
+                              } else {
+                                print('Error al insertar datos.');
+                              }
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RegistroHecho(),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 233, 83, 208),
+                        padding: EdgeInsets.all(16.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                        ),
+                        elevation: 6.0,
+                        shadowColor: Color.fromARGB(255, 33, 33, 214),
                       ),
-                    ],
-                  ),
-                ],
+                            child: Text(
+                              'REGISTRAR',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 227, 227, 235),
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Sans-serif',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      );
-    }
-
-    void _guardarEnBaseDatos() {
-      // Verifica se todos os campos necessários foram preenchidos
-      List<String> emptyFields = checkEmptyFields();
-      if (emptyFields.isNotEmpty) {
-        // Exibe uma mensagem indicando campos inválidos
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("Campos Inválidos"),
-              content: Text("Por favor, preencha todos os campos corretamente.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,)),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,),),
-                ),
-              ],
-            );
-          },
         );
-        return; // Sai da função se algum campo estiver vazio
       }
 
-      // Cria um mapa com os dados do medicamento
-      Map<String, dynamic> fila = {
-        'nome': selectedEsecialidad,
-        'doctor': selectedDoctor,
-        'fecha': selectedFecha,
-        'hora': selectedHora,
-      };
+      bool _isDateValid(String date) {
+        RegExp regex =
+            RegExp(r'^([1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$');
+        return regex.hasMatch(date);
+      }
 
-      // Insere o medicamento no banco de dados
-      bdHelper.insertarBD('Medicamento', fila);
+      bool _isMonthValid(String date) {
+        List<String> dateParts = date.split('/');
+        if (dateParts.length == 3) {
+          try {
+            int month = int.parse(dateParts[1]);
+            return month >= 1 && month <= 12;
+          } catch (e) {
+            return false;
+          }
+        }
+        return false;
+      }
 
-            showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("Medicamento Inserido"),
-              content: Text("Medicamento inserido com sucesso!"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
-                ),
-              ],
-            );
-          },
-        );
-      // Limpar os campos após a inserção
-      setState(() {
-        selectedEsecialidad = null;
-        selectedDoctor = null;
-        selectedFecha = null;
-        selectedHora = null;
-      });
+      bool _isYearValid(String date) {
+        List<String> dateParts = date.split('/');
+        if (dateParts.length == 3) {
+          try {
+            int year = int.parse(dateParts[2]);
+            return year >= 1900 && year <= 2100;
+          } catch (e) {
+            return false;
+          }
+        }
+        return false;
+      }
 
-      // Exibir uma mensagem indicando que os dados foram inseridos
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Medicamento inserido com sucesso!'),
-          duration: Duration(seconds: 2),
-        ),
-      );
+      bool _isSexValid(String sex) {
+        return ['hombre', 'mujer'].contains(sex.toLowerCase());
+      }
     }
-
-    List<String> checkEmptyFields() {
-      List<String> emptyFields = [];
-
-      if (selectedEsecialidad == null || selectedEsecialidad!.isEmpty) {
-        emptyFields.add("Especialidad");
-      }
-      if (selectedDoctor == null) {
-        emptyFields.add("Doctor");
-      }
-      if (selectedFecha == null) {
-        emptyFields.add("Fecha");
-      }
-      if (selectedHora == null) {
-        emptyFields.add("Quantidade no Envase");
-      }
-
-      return emptyFields;
-    }
-  }

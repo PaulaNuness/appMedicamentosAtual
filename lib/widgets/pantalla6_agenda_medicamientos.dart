@@ -179,7 +179,7 @@
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Pantalla9_visitasmedicas(),
+              builder: (context) => Pantalla9_VisitasMedicas(),
             ),
           );
         },
