@@ -178,6 +178,14 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
                       }
                     },
                 child: Text('Guardar')),
+                              ElevatedButton(
+                onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+
+                        Navigator.pop(context);
+                      }
+                    },
+                child: Text('Salir')),
             ],
           ),
         ),
