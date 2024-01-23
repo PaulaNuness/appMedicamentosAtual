@@ -287,7 +287,7 @@
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,),),
+                  child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                 ),
               ],
             );
