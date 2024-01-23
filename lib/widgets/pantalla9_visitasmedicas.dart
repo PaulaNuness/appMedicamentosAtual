@@ -17,11 +17,9 @@
 
     String? selectedEsecialidad;
     String? selectedDoctor;
-    String? selectedDias;
-    String? selectedComprimidos;
-    List<String> selectedHorarios = [];
+    String? selectedFecha;
+    String? selectedHora;
 
-    TextEditingController recomendacionesController = TextEditingController();
 
     @override
     Widget build(BuildContext context) {
@@ -91,7 +89,7 @@
                   SizedBox(height: 10),
                   DropdownButton<String>(
                     isExpanded: true,
-                    value: selectedDias,
+                    value: selectedFecha,
                     items: ['DÍAS', 'MESES', 'AÑOS']
                         .map((String value) {
                           return DropdownMenuItem<String>(
@@ -102,15 +100,15 @@
                         .toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        selectedDias = newValue;
+                        selectedFecha = newValue;
                       });
                     },
-                    hint: Text('SELECCIONAR UNIDAD DE TIEMPO'),
+                    hint: Text('SELECCIONAR FECHA'),
                   ),
                   SizedBox(height: 20),
                   DropdownButton<String>(
                     isExpanded: true,
-                    value: selectedComprimidos,
+                    value: selectedHora,
                     items: List.generate(30, (index) => (index + 1).toString())
                         .map((String value) {
                       return DropdownMenuItem<String>(
@@ -120,77 +118,10 @@
                     }).toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        selectedComprimidos = newValue;
+                        selectedHora = newValue;
                       });
                     },
-                    hint: Text('CANTIDAD EN EL ENVASE'),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'RECOMENDACIONES:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    width: 300,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: TextField(
-                      controller: recomendacionesController,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Horario/Alertas:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    height: 130,
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 5.0,
-                        mainAxisSpacing: 5.0,
-                      ),
-                      itemCount: 24,
-                      itemBuilder: (context, index) {
-                        String horario =
-                            '${index.toString().padLeft(2, '0')}:00';
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if (selectedHorarios.contains(horario)) {
-                                selectedHorarios.remove(horario);
-                              } else {
-                                selectedHorarios.add(horario);
-                              }
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(9.0),
-                            decoration: BoxDecoration(
-                              color: selectedHorarios.contains(horario)
-                                  ? Colors.blue
-                                  : Colors.grey[100],
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Text(
-                              horario,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: selectedHorarios.contains(horario)
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                    hint: Text('SELECIONAR HORA'),
                   ),
                   SizedBox(height: 30),
                   Row(
@@ -267,11 +198,9 @@
       // Cria um mapa com os dados do medicamento
       Map<String, dynamic> fila = {
         'nome': selectedEsecialidad,
-        'quantidade': int.parse(selectedDoctor ?? '0'),
-        'unidadeTempo': selectedDias,
-        'quantidadeEnvase': int.parse(selectedComprimidos ?? '0'),
-        'recomendacoes': recomendacionesController.text,
-        'horarios': selectedHorarios.join(','),
+        'doctor': selectedDoctor,
+        'fecha': selectedFecha,
+        'hora': selectedHora,
       };
 
       // Insere o medicamento no banco de dados
@@ -298,10 +227,8 @@
       setState(() {
         selectedEsecialidad = null;
         selectedDoctor = null;
-        selectedDias = null;
-        selectedComprimidos = null;
-        selectedHorarios = [];
-        recomendacionesController.clear();
+        selectedFecha = null;
+        selectedHora = null;
       });
 
       // Exibir uma mensagem indicando que os dados foram inseridos
@@ -320,19 +247,13 @@
         emptyFields.add("Especialidad");
       }
       if (selectedDoctor == null) {
-        emptyFields.add("Número");
+        emptyFields.add("Doctor");
       }
-      if (selectedDias == null) {
-        emptyFields.add("Unidade de Tempo");
+      if (selectedFecha == null) {
+        emptyFields.add("Fecha");
       }
-      if (selectedComprimidos == null) {
+      if (selectedHora == null) {
         emptyFields.add("Quantidade no Envase");
-      }
-      if (selectedHorarios.isEmpty) {
-        emptyFields.add("Horários");
-      }
-      if (recomendacionesController.text.isEmpty) {
-        emptyFields.add("Recomendações");
       }
 
       return emptyFields;
