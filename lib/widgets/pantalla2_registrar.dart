@@ -219,7 +219,7 @@
                                     return AlertDialog(
                                       title: Text("Error"),
                                       content: Text(
-                                        "Por favor, complete todos los campos.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,)
+                                        "Por favor, complete todos los campos.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)
                                       ),
                                       actions: [
                                         TextButton(
@@ -251,7 +251,7 @@
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text("OK"),
+                                          child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                                         ),
                                       ],
                                     );
@@ -274,7 +274,7 @@
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text("OK"),
+                                          child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                                         ),
                                       ],
                                     );
@@ -297,7 +297,7 @@
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text("OK"),
+                                          child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                                         ),
                                       ],
                                     );
