@@ -16,7 +16,7 @@
     BDHelper bdHelper = BDHelper();
 
     String? selectedEsecialidad;
-    String? selectedNumero;
+    String? selectedDoctor;
     String? selectedDias;
     String? selectedComprimidos;
     List<String> selectedHorarios = [];
@@ -73,7 +73,7 @@
                   SizedBox(height: 20),
                   DropdownButton<String>(
                     isExpanded: true,
-                    value: selectedNumero,
+                    value: selectedDoctor,
                     items: List.generate(31, (index) => (index + 1).toString())
                         .map((String value) {
                       return DropdownMenuItem<String>(
@@ -83,10 +83,10 @@
                     }).toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        selectedNumero = newValue;
+                        selectedDoctor = newValue;
                       });
                     },
-                    hint: Text('SELECCIONAR CANTIDAD'),
+                    hint: Text('SELECCIONAR DOCTOR'),
                   ),
                   SizedBox(height: 10),
                   DropdownButton<String>(
@@ -267,7 +267,7 @@
       // Cria um mapa com os dados do medicamento
       Map<String, dynamic> fila = {
         'nome': selectedEsecialidad,
-        'quantidade': int.parse(selectedNumero ?? '0'),
+        'quantidade': int.parse(selectedDoctor ?? '0'),
         'unidadeTempo': selectedDias,
         'quantidadeEnvase': int.parse(selectedComprimidos ?? '0'),
         'recomendacoes': recomendacionesController.text,
@@ -297,7 +297,7 @@
       // Limpar os campos após a inserção
       setState(() {
         selectedEsecialidad = null;
-        selectedNumero = null;
+        selectedDoctor = null;
         selectedDias = null;
         selectedComprimidos = null;
         selectedHorarios = [];
@@ -319,7 +319,7 @@
       if (selectedEsecialidad == null || selectedEsecialidad!.isEmpty) {
         emptyFields.add("Especialidad");
       }
-      if (selectedNumero == null) {
+      if (selectedDoctor == null) {
         emptyFields.add("Número");
       }
       if (selectedDias == null) {
