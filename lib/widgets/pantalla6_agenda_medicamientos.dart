@@ -205,14 +205,32 @@
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.pink),
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        
-                      ),
+                                Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.pink),
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: proximasVisitas.length,
+              itemBuilder: (context, index) {
+                var visita = proximasVisitas[index];
+
+                return ListTile(
+                  title: Text(
+                    visita['especialidad'],
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  
+                
+                );
+              },
+            ),
+          ),
                       SizedBox(height: 50),
                     ],
                   ),
