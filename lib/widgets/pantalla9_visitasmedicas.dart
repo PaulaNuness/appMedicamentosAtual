@@ -25,7 +25,24 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
         //obligamos a quitar el teclado cuando se toque fuera del TextField
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      
       child: Scaffold(
+                appBar: AppBar(
+          backgroundColor: Colors.grey[300],
+          automaticallyImplyLeading: false, // Remover a seta de voltar
+          title: Center(
+            child: Text(
+              'VISITAS MEDICAS',
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.pink,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                fontFamily: 'Arial',
+              ),
+            ),
+          ),
+        ),
           body: SafeArea(
         child: Form(
           key: _formKey,
@@ -36,7 +53,7 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  label: Text('Especialidad'),
+                  label: Text('Especialidad',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                 ),
               validator: (valor){
                 if (valor==null || valor.isEmpty){
@@ -59,7 +76,7 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  label: Text('Nombre del doctor'),
+                  label: Text('Nombre del doctor',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                 ),
                 validator: (valor){
                 if (valor==null || valor.isEmpty){
@@ -82,7 +99,7 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  label: Text('Lugar de la visita'),
+                  label: Text('Lugar de la visita',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                 ),
                 validator: (valor){
                 if (valor==null || valor.isEmpty){
@@ -105,7 +122,7 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
               TextFormField(
                 keyboardType: TextInputType.datetime,
                 decoration: InputDecoration(
-                  label: Text('Fecha de la visita'),
+                  label: Text('Fecha de la visita',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                 ),
                 validator: (valor){
                 if (valor==null || valor.isEmpty){
@@ -144,7 +161,7 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
               TextFormField(
                 keyboardType: TextInputType.datetime,
                 decoration: InputDecoration(
-                  label: Text('Hora de la visita'),
+                  label: Text('Hora de la visita',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
                 ),
                 validator: (valor){
                 if (valor==null || valor.isEmpty){
@@ -177,15 +194,31 @@ class _PaginaVisitaMedicaState extends State<PaginaVisitaMedica> {
                         Navigator.pop(context);
                       }
                     },
+                      style: ElevatedButton.styleFrom(
+    primary: Color.fromARGB(255, 152, 177, 233), // Cor de fundo do botão
+                            padding: EdgeInsets.symmetric(vertical: 15.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+  ),
                 child: Text('Guardar')),
-                              ElevatedButton(
-                onPressed: () {
-                     
+                              SizedBox(
+                height: 10,
+              ),
+ElevatedButton(
+  onPressed: () {
+    Navigator.pop(context);
+  },
+  style: ElevatedButton.styleFrom(
+    primary: Color.fromARGB(255, 152, 177, 233), // Cor de fundo do botão
+                            padding: EdgeInsets.symmetric(vertical: 15.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+  ),
+  child: Text('Sair', style: TextStyle(color: Colors.white)), // Cor do texto do botão
+),
 
-                        Navigator.pop(context);
-                      
-                    },
-                child: Text('Salir')),
             ],
           ),
         ),
