@@ -9,12 +9,6 @@
           import 'package:flutter1/widgets/pantalla9_visitasmedicas.dart';
             import 'package:intl/intl.dart';
 
-            class VisitaMedico {
-              String nomeMedico;
-              DateTime dataVisita;
-
-              VisitaMedico({required this.nomeMedico, required this.dataVisita});
-            }
 
             class AgendaMedicamentos extends StatefulWidget {
               @override
@@ -24,12 +18,15 @@
             class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
               BDHelper bdHelper = BDHelper();
               List<Map<String, dynamic>> medicamentosAReponer = [];
+              List<Map<String, dynamic>> proximasVisitas = [];
 
               @override
               void initState() {
                 super.initState();
                 _carregarMedicamentos();
+                _carregarVisitas();
               }
+              
 
               Future<void> _carregarMedicamentos() async {
                 List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos();
@@ -38,6 +35,14 @@
                   medicamentosAReponer = medicamentos;
                 });
               }
+              Future<void> _carregarVisitas() async {
+                List<Map<String, dynamic>> visitas = await bdHelper.consultarVisitas();
+
+                setState(() {
+                  proximasVisitas = visitas;
+                });
+              }
+
               int _selectedIndex = 0;
               late Timer _timer;
 
@@ -48,10 +53,7 @@
                 pantalla5_lista_medicamientos(),
               ];
 
-              List<VisitaMedico> visitasMedicas = [
-                VisitaMedico(nomeMedico: 'Dr. Silva', dataVisita: DateTime.now().add(Duration(days: 7))),
-                VisitaMedico(nomeMedico: 'Dra. Santos', dataVisita: DateTime.now().add(Duration(days: 14))),
-              ];
+              
 
               @override
               void dispose() {
@@ -209,18 +211,7 @@
                           border: Border.all(color: Colors.pink),
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         ),
-                        child: DataTable(
-                          columns: [
-                            DataColumn(label: Text('Médico')),
-                            DataColumn(label: Text('Data')),
-                          ],
-                          rows: visitasMedicas.map((visita) {
-                            return DataRow(cells: [
-                              DataCell(Text(visita.nomeMedico)),
-                              DataCell(Text(DateFormat('dd/MM/yyyy').format(visita.dataVisita))),
-                            ]);
-                          }).toList(),
-                        ),
+                        
                       ),
                       SizedBox(height: 50),
                     ],

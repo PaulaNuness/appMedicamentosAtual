@@ -103,58 +103,6 @@ class VisitaMedica{
     this.fecha = new DateTime(this._fecha.year, this._fecha.month, this._fecha.day, horas, minutos);
   }
 
-  Future<List<VisitaMedica>> GeTProximasVisitas(bool modoLocal)
-  async{
-    List<VisitaMedica> proximasVisitas = [];
-    VisitaMedica visitaMedica = new VisitaMedica();
-    DateTime fechaActual = DateTime.now();
-    
-    //Si el modo de trabajo es local, se cargan los datos de la base de datos local
-    if(modoLocal)
-    {
-      BDHelper bdHelper = BDHelper();
-      List<Map<String, dynamic>> visitas = await bdHelper.consultarBD('VisitaMedica');
-      for(int i=0; i<visitas.length; i++)
-      {
-        DateTime fechaVisita = DateTime.parse(visitas[i]['fecha']);
-        if(fechaVisita.isAfter(fechaActual))
-        {
-          visitaMedica = VisitaMedica.fromMap(visitas[i]);
-          proximasVisitas.add(visitaMedica);
-        }
-      }
-    }
-    else
-    {
-      //Si el modo de trabajo es remoto, se cargan los datos de la API
-      proximasVisitas = await _getFromAPI(10);
-    }
-    
-    return proximasVisitas;
-  }
-
-  //lectura de datos de la API
-  Future<List<VisitaMedica>> _getFromAPI(int numero) async {
-
-    List<VisitaMedica> lista = [];
-    VisitaMedica visitaMedica = new VisitaMedica();
-    var map = new Map<String, dynamic>();
-    
-    for(int i=0;i<numero;i++)
-    {
-      await Future.delayed(Duration(milliseconds: 200), () {
-        map['id'] = i;
-        map['especialidad'] = 'Especialidad '+i.toString();
-        map['doctor'] = 'Doctor '+i.toString();
-        map['lugar'] = 'Lugar '+i.toString();
-        map['fecha'] = DateTime.now().toString();
-        visitaMedica = VisitaMedica.fromMap(map);
-        lista.add(visitaMedica);
-      });
-    }
-    return lista;
-  }
-
   //Metodo para convertir un objeto de tipo VisitaMedica a Map
   Map<String, dynamic> toMap()
   {

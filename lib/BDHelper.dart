@@ -65,6 +65,12 @@
       return resultado;
     }
 
+    // Consultar a tabela 'Medicamento' na base de dados
+    Future<List<Map<String, dynamic>>> consultarVisitas() async {
+      Database? bd = await baseDatos;
+      var resultado = await bd!.query('VisitaMedica');
+      return resultado;
+    }
     
     Future<void> borrarMedicamento(int id) async {
       Database? bd = await baseDatos;
