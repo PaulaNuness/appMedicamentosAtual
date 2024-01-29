@@ -4,6 +4,7 @@ import 'package:flutter1/widgets/pantalla3_usuario.dart';
 import 'package:flutter1/BDHelper.dart';
 import 'package:flutter1/widgets/pantalla7_borrar_medicamento.dart';
 import 'package:flutter1/widgets/pantalla8_configuracion.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Pantalla1_Inicio extends StatelessWidget {
   BDHelper bdHelper = BDHelper();
@@ -221,6 +222,8 @@ class Pantalla1_Inicio extends StatelessWidget {
                     if (resultado.isNotEmpty) {
                       int id = resultado[0]['id'];
                       print('ID do Usuário: $id');
+                      final prefs = await SharedPreferences.getInstance();
+prefs.setString('minhaVariavel', 'id');
 
                       Navigator.push(
                         context,
