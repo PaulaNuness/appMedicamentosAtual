@@ -10,6 +10,7 @@ class Pantalla1_Inicio extends StatelessWidget {
   BDHelper bdHelper = BDHelper();
   TextEditingController usuarioController = TextEditingController();
   TextEditingController contrasenaController = TextEditingController();
+  static int id=0;
 
   @override
   Widget build(BuildContext context) {
@@ -220,17 +221,15 @@ class Pantalla1_Inicio extends StatelessWidget {
                     );
 
                     if (resultado.isNotEmpty) {
-                      int id = resultado[0]['id'];
+                      id = resultado[0]['id'];
                       print('ID do Usuário: $id');
                       final prefs = await SharedPreferences.getInstance();
-prefs.setString('minhaVariavel', 'id');
+                      prefs.setString('minhaVariavel', 'id');
 
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Pantalla3_usuario(
-                            
-                          ),
+                          builder: (context) => Pantalla3_usuario(),
                         ),
                       );
                     } else {

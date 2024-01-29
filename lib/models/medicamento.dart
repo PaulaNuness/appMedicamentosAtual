@@ -20,7 +20,7 @@ class Medicamento {
   // Método para converter o objeto em um mapa
   Map<String, dynamic> toMap() {
     return {
-      'id_usuario': idUsuario,
+      'idUsuario': idUsuario,
       'nome': nome,
       'quantidade': quantidade,
       'unidadeTempo': unidadeTempo,

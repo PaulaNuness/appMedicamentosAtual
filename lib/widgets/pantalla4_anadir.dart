@@ -1,5 +1,6 @@
   import 'package:flutter/material.dart';
   import 'package:flutter1/BDHelper.dart';
+import 'package:flutter1/widgets/pantalla1_inicio.dart';
   import 'package:flutter1/widgets/pantalla3_usuario.dart';
 
   import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@
     String? selectedDias;
     String? selectedComprimidos;
     List<String> selectedHorarios = [];
+    int minhavariavel=Pantalla1_Inicio.id;
 
     TextEditingController recomendacionesController = TextEditingController();
 
@@ -265,6 +267,7 @@
 
       // Cria um mapa com os dados do medicamento
       Map<String, dynamic> fila = {
+        'idUsuario':minhavariavel,
         'nome': selectedMedicamento,
         'quantidade': int.parse(selectedNumero ?? '0'),
         'unidadeTempo': selectedDias,

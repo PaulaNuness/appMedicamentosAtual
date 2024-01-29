@@ -1,5 +1,6 @@
   import 'package:flutter/material.dart';
   import 'package:flutter1/BDHelper.dart';
+import 'package:flutter1/widgets/pantalla1_inicio.dart';
   import 'package:flutter1/widgets/pantalla3_usuario.dart';
 
   class pantalla7_borrar_medicamiento extends StatefulWidget {
@@ -10,6 +11,7 @@
   class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
     BDHelper bdHelper = BDHelper();
     List<Map<String, dynamic>> medicamentosAReponer = [];
+    int minhavariavel=Pantalla1_Inicio.id;
 
     @override
     void initState() {
@@ -18,7 +20,7 @@
     }
 
     Future<void> _carregarMedicamentos() async {
-      List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos();
+      List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos(minhavariavel);
 
       setState(() {
         medicamentosAReponer = medicamentos;

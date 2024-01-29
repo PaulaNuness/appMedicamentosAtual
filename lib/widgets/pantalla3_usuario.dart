@@ -15,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
   class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
     int _selectedIndex = 0;
-    String minhaVariavel = '';
 
     // Lista de páginas correspondentes a cada índice do BottomNavigationBar
     final List<Widget> _pages = [
@@ -158,7 +157,7 @@ import 'package:shared_preferences/shared_preferences.dart';
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Que deseas hacer $minhaVariavel',
+                    'Que deseas hacer ',
                     style: TextStyle(fontSize: 28),
                   ),
                   SizedBox(height: 30),

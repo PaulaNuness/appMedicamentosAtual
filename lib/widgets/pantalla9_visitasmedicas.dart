@@ -186,22 +186,23 @@
                 SizedBox(
                   height: 30,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          bdHelper.insertarBD('VisitaMedica', visitaMedica.toMap());
-                          Navigator.pop(context);
-                        }
-                      },
-                        style: ElevatedButton.styleFrom(
-      primary: Color.fromARGB(255, 152, 177, 233), // Cor de fundo do botão
-                              padding: EdgeInsets.symmetric(vertical: 15.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
+ElevatedButton(
+  onPressed: () async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      await bdHelper.insertarBD('VisitaMedica', visitaMedica.toMap());
+      Navigator.popUntil(context, ModalRoute.withName('/pantalla6_agendamedicamentos'));
+    }
+  },
+  style: ElevatedButton.styleFrom(
+    primary: Color.fromARGB(255, 152, 177, 233),
+    padding: EdgeInsets.symmetric(vertical: 15.0),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10.0),
     ),
-                  child: Text('Guardar')),
+  ),
+  child: Text('Guardar'),
+),
                                 SizedBox(
                   height: 10,
                 ),
