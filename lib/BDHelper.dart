@@ -6,7 +6,7 @@
   // é um helper para interagir com um banco de dados SQLite no Flutter.
   class BDHelper{
     static Database? _baseDatos;//é uma instância estática da classe Database que representa a conexão com o banco de dados.
-    static const String nombreBD = "BDD.db";// é o nome do arquivo do banco de dados SQLite.
+    static const String nombreBD = "BDM.db";// é o nome do arquivo do banco de dados SQLite.
 
     //iniciar la base de datos
     Future<Database?> get baseDatos async{//é um getter assíncrono que retorna a instância do banco de dados. Se a instância _baseDatos já estiver inicializada, ela é retornada imediatamente
@@ -98,13 +98,6 @@
     }
   }
 
-  Future<List<Map<String, dynamic>>> consultarVisitasPorUsuario(int idUsuario) async {
-  Database? bd = await baseDatos;
-  var resultado = await bd!.query('VisitaMedica', where: 'id_usuario = ?', whereArgs: [idUsuario]);
-  return resultado;
-}
-
-
 
 
 
@@ -121,13 +114,12 @@
           );
           //para añadir una segunda tabla
           await db.execute(
-            "CREATE TABLE if not exists Medicamento(id INTEGER PRIMARY KEY, nome TEXT,quantidade INTEGER, unidadeTempo TEXT,quantidadeEnvase INTEGER,recomendacoes TEXT,horarios TEXT  )"
+            "CREATE TABLE if not exists Medicamento(id INTEGER PRIMARY KEY,id_usuario INTEGER, nome TEXT,quantidade INTEGER, unidadeTempo TEXT,quantidadeEnvase INTEGER,recomendacoes TEXT,horarios TEXT  )"
           );
           //para añadir una teceratabla
-         await db.execute(
-  "CREATE TABLE IF NOT EXISTS VisitaMedica(id INTEGER PRIMARY KEY, id_usuario INTEGER, especialidad TEXT, doctor TEXT, lugar TEXT, fecha TEXT)"
-);
-
+          await db.execute(
+          "CREATE TABLE IF NOT EXISTS VisitaMedica(id INTEGER PRIMARY KEY, id_usuario INTEGER,especialidad TEXT, doctor TEXT, lugar TEXT, fecha TEXT)"
+        );
         }
         );
       return baseDatos;
