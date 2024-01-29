@@ -1,4 +1,5 @@
 class Medicamento {
+  int idUsuario; // Adicionando o atributo id_usuario
   String nome;
   int quantidade;
   String unidadeTempo;
@@ -7,6 +8,7 @@ class Medicamento {
   List<String> horarios;
 
   Medicamento({
+    required this.idUsuario,
     required this.nome,
     required this.quantidade,
     required this.unidadeTempo,
@@ -18,6 +20,7 @@ class Medicamento {
   // Método para converter o objeto em um mapa
   Map<String, dynamic> toMap() {
     return {
+      'id_usuario': idUsuario,
       'nome': nome,
       'quantidade': quantidade,
       'unidadeTempo': unidadeTempo,
@@ -27,9 +30,10 @@ class Medicamento {
     };
   }
 
-    // Método para criar um objeto Medicamento a partir de um mapa
+  // Método para criar um objeto Medicamento a partir de um mapa
   factory Medicamento.fromMap(Map<String, dynamic> map) {
     return Medicamento(
+      idUsuario: map['id_usuario'],
       nome: map['nome'],
       quantidade: map['quantidade'],
       unidadeTempo: map['unidadeTempo'],
@@ -39,7 +43,8 @@ class Medicamento {
     );
   }
 
-    // Getters individuais
+  // Getters individuais
+  int get getIdUsuario => idUsuario;
   String get getNome => nome;
   int get getQuantidade => quantidade;
   String get getUnidadeTempo => unidadeTempo;
