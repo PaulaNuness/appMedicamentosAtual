@@ -7,7 +7,7 @@ import 'package:path/path.dart';
   // é um helper para interagir com um banco de dados SQLite no Flutter.
   class BDHelper{
     static Database? _baseDatos;//é uma instância estática da classe Database que representa a conexão com o banco de dados.
-    static const String nombreBD = "BDME.db";// é o nome do arquivo do banco de dados SQLite
+    static const String nombreBD = "BDMEDICA.db";// é o nome do arquivo do banco de dados SQLite
 
 
   Future<Database?> get baseDatos async {
