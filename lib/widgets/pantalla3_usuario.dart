@@ -4,9 +4,11 @@
   import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
   import 'package:flutter1/widgets/pantalla6_agenda_medicamientos.dart';
   import 'package:flutter1/widgets/pantalla7_borrar_medicamento.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
   class Pantalla3_usuario extends StatefulWidget {
+    
     @override
     _Pantalla3_usuarioState createState() => _Pantalla3_usuarioState();
   }
@@ -26,13 +28,15 @@
     // Função chamada quando uma aba é pressionada
     void _onItemTapped(int index) {
       setState(() {
+      
         _selectedIndex = index;
+      
       });
     }
 
-
     @override
     Widget build(BuildContext context) {
+      
       return MaterialApp(
         home: Scaffold(
           //configuración de la barra superior de la aplicación
@@ -153,7 +157,7 @@
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Que deseas hacer',
+                    'Que deseas hacer ',
                     style: TextStyle(fontSize: 28),
                   ),
                   SizedBox(height: 30),

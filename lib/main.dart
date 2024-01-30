@@ -17,6 +17,7 @@ void main() {
           ChangeNotifierProvider(
           //cargamos el modo de funcionamiento por defecto
           create: (_) => ModoTrabajo()), 
+          
       ],
       child: MyApp(),
       ),
