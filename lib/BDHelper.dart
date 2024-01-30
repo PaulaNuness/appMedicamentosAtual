@@ -3,16 +3,12 @@ import 'package:flutter1/models/medicamento.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-<<<<<<< HEAD
+
   // é um helper para interagir com um banco de dados SQLite no Flutter.
   class BDHelper{
     static Database? _baseDatos;//é uma instância estática da classe Database que representa a conexão com o banco de dados.
-    static const String nombreBD = "BDME.db";// é o nome do arquivo do banco de dados SQLite.
-=======
-class BDHelper {
-  static Database? _baseDatos;
-  static const String nombreBD = "BDMEDI.db";
->>>>>>> 97ccfb9cdb7d6e9b7fdd47439eab56ff4b8ad747
+    static const String nombreBD = "BDME.db";// é o nome do arquivo do banco de dados SQLite
+
 
   Future<Database?> get baseDatos async {
     if (_baseDatos != null) {
