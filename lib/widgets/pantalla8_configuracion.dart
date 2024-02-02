@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter1/modo/modo_trabajo.dart';
 import 'package:flutter1/tema/tema.dart';
+import 'package:flutter1/tipo_usuario/tipo_usuario.dart';
 import 'package:provider/provider.dart';
 
 class Pantalla8_configuracion extends StatefulWidget {
@@ -16,6 +17,7 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
   Widget build(BuildContext context) {
     final temaActual = Provider.of<CargadorTema>(context);
     final modoTrabajo = Provider.of<ModoTrabajo>(context);
+    final tipousuario = Provider.of<TipoUsuario>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -137,12 +139,13 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
                         ),
                       ),
                       value: modoTrabajo.modoLocal,
-                      onChanged: (value) => modoTrabajo.modoLocal = value,
+            onChanged: (value) => modoTrabajo.modoLocal = value,
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 10), // Espaçamento
+                            SizedBox(height: 10), // Espaçamento
+              // Sección 3 Ajustes del tipo de usuario
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
@@ -164,20 +167,21 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
                       ),
                       tileColor: temaActual.temaActual.colorScheme.secondary,
                     ),
-                    SwitchListTile(
+                                  SwitchListTile(
                       title: Text(
-                        "Gestor de usuarios",
+                        "Administrador",
                         style: TextStyle(
                           fontSize: 25,
                           color: temaActual.temaActual.colorScheme.onPrimary,
                         ),
                       ),
-                      value: modoTrabajo.modoLocal,
-                      onChanged: (value) => modoTrabajo.modoLocal = value,
+                      value: tipousuario.isAdmin,
+            onChanged: (value) => tipousuario.isAdmin = value,
                     ),
                   ],
                 ),
               ),
+
             ],
           ),
         ),

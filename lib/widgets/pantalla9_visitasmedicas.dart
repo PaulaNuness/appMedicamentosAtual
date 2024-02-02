@@ -1,6 +1,8 @@
   import 'package:flutter/material.dart';
   import 'package:flutter1/BDHelper.dart';
   import 'package:flutter1/models/visitamedica.dart';
+import 'package:flutter1/widgets/pantalla3_usuario.dart';
+import 'package:flutter1/widgets/pantalla6_agenda_medicamientos.dart';
 
 
 
@@ -191,7 +193,12 @@ ElevatedButton(
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       await bdHelper.insertarBD('VisitaMedica', visitaMedica.toMap());
-      Navigator.popUntil(context, ModalRoute.withName('/pantalla6_agendamedicamentos'));
+      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AgendaMedicamentos(),
+                            ),
+                          );
     }
   },
   style: ElevatedButton.styleFrom(

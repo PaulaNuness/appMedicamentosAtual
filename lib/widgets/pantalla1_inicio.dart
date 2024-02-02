@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter1/tipo_usuario/tipo_usuario.dart';
 import 'package:flutter1/widgets/pantalla2_registrar.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
 import 'package:flutter1/BDHelper.dart';
 import 'package:flutter1/widgets/pantalla7_borrar_medicamento.dart';
 import 'package:flutter1/widgets/pantalla8_configuracion.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Pantalla1_Inicio extends StatelessWidget {
@@ -14,6 +16,7 @@ class Pantalla1_Inicio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[300],

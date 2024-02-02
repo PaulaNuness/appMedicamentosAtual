@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter1/BDHelper.dart';
+import 'package:flutter1/modo/modo_trabajo.dart';
 import 'package:flutter1/widgets/Registro_hecho.dart';
 import 'package:flutter1/widgets/pantalla1_inicio.dart';
 import 'package:flutter1/widgets/pantalla3_usuario.dart';
@@ -8,6 +10,9 @@ import 'package:flutter1/widgets/pantalla4_anadir.dart';
 import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
 import 'package:flutter1/widgets/pantalla9_visitasmedicas.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+
 
 class AgendaMedicamentos extends StatefulWidget {
   @override
@@ -36,7 +41,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   }
 
   Future<void> _carregarVisitas() async {
-    List<Map<String, dynamic>> visitas = await bdHelper.consultarVisitas();
+    List<Map<String, dynamic>> visitas = await bdHelper.consultarVisitas(minhavariavel);
 
     setState(() {
       proximasVisitas = visitas;
@@ -44,7 +49,6 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   }
 
   int _selectedIndex = 0;
-  late Timer _timer;
 
   final List<Widget> _pages = [
     Pantalla1_Inicio(),
@@ -54,13 +58,9 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   ];
 
   @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final modoTrabajo = Provider.of<ModoTrabajo>(context);
+    debugPrint('Conteúdo da variável modoTrabajo: ${modoTrabajo.modoRemoto}');
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -106,12 +106,9 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                       children: [
                         ElevatedButton(
                           onPressed: () async {
-                            // Chame o método para decrementar a quantidade
                             await bdHelper.decrementarQuantidadeMedicamento(medicamento['id'] as int);
-                            // Atualize a lista de medicamentos
                             await _carregarMedicamentos();
 
-                            // Mostrar o AlertDialog
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -123,7 +120,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
+                                      child: Text("OK", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.pink,)),
                                     ),
                                   ],
                                 );
@@ -149,7 +146,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text("OK",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)),
+                                      child: Text("OK", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.pink,)),
                                     ),
                                   ],
                                 );
@@ -192,60 +189,111 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
             ),
           ),
           SizedBox(height: 30),
-          Text(
-            'Próximas Visitas ao Médico:',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Próximas Visitas ao Médico:',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Visibility(
+                  visible: !modoTrabajo.modoRemoto,//si es local
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.pink),
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    ),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: DataTable(
+                        columns: [
+                          DataColumn(label: Text('Especialidad')),
+                          DataColumn(label: Text('Nombre Médico')),
+                          DataColumn(label: Text('Fecha')),
+                        ],
+                        rows: proximasVisitas.map((visita) {
+                          return DataRow(cells: [
+                            DataCell(
+                              Text(
+                                visita['especialidad'],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Text(
+                                visita['doctor'],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Text(
+                                visita['fecha'],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ]);
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+Visibility(
+  visible: modoTrabajo.modoRemoto,
+  child: Container(
+    height: 150,
+    child: ListView.builder(
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        final List<String> especialidades = ['Cardiologia', 'Dermatologia', 'Neurologia', 'Ortopedia', 'Pediatria', 'Oftalmologia', 'Geriatria', 'Ginecologia', 'Urologia', 'Endocrinologia'];
+        final List<String> nombres = ['Carlos', 'Manuel', 'Alvaro', 'Roberto', 'Sergio', 'Ivan', 'Jesus', 'Raul', 'Mario', 'Francisco'];
+        final fake = Faker();
+        final randomEspecialidade = fake.randomGenerator.element(especialidades);
+        final randomNombre = fake.randomGenerator.element(nombres);
+        return Card(
+          elevation: 5,
+          margin: EdgeInsets.all(10),
+          child: ListTile(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'DR. $randomNombre',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8), // Espaço entre as duas linhas
+                Text(
+                  'Especialidad: $randomEspecialidade',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0), // Ajuste o valor conforme necessário
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.pink),
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columns: [
-                    DataColumn(label: Text('Especialidad')),
-                    DataColumn(label: Text('Nombre Médico')),
-                    DataColumn(label: Text('Fecha')),
-                  ],
-                  rows: proximasVisitas.map((visita) {
-                    return DataRow(cells: [
-                      DataCell(
-                        Text(
-                          visita['especialidad'],
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        Text(
-                          visita['doctor'],
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        Text(
-                          visita['fecha'],
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ]);
-                  }).toList(),
-                ),
-              ),
+        );
+      },
+    ),
+  ),
+),
+
+
+              ],
             ),
           ),
           SizedBox(height: 50),

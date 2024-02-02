@@ -64,9 +64,13 @@ import 'package:path/path.dart';
     return resultado;
   }
 
-  Future<List<Map<String, dynamic>>> consultarVisitas() async {
+    Future<List<Map<String, dynamic>>> consultarVisitas(int idusuario) async {
     Database? bd = await baseDatos;
-    var resultado = await bd!.query('VisitaMedica');
+    var resultado = await bd!.query(
+      'VisitaMedica',
+      where: 'idusuario = ?',
+      whereArgs: [idusuario],
+    );
     return resultado;
   }
 

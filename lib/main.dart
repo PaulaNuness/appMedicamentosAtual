@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter1/modo/modo_trabajo.dart';
 import 'package:flutter1/tema/tema.dart';
+import 'package:flutter1/tipo_usuario/tipo_usuario.dart';
 import 'package:flutter1/widgets/pantalla1_inicio.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,10 @@ void main() {
           ChangeNotifierProvider(
           //cargamos el modo de funcionamiento por defecto
           create: (_) => ModoTrabajo()), 
+          ChangeNotifierProvider(
+          //cargamos el modo de funcionamiento por defecto
+          create: (_) => TipoUsuario()), 
+          
           
       ],
       child: MyApp(),

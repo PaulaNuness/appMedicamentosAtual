@@ -1,13 +1,17 @@
   import 'package:flutter/material.dart';
+import 'package:flutter1/modo/modo_trabajo.dart';
   import 'package:flutter1/widgets/pantalla1_inicio.dart';
   import 'package:flutter1/widgets/pantalla4_anadir.dart';
   import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
   import 'package:flutter1/widgets/pantalla6_agenda_medicamientos.dart';
   import 'package:flutter1/widgets/pantalla7_borrar_medicamento.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
   class Pantalla3_usuario extends StatefulWidget {
+    
     
     @override
     _Pantalla3_usuarioState createState() => _Pantalla3_usuarioState();
@@ -15,7 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
   class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
     int _selectedIndex = 0;
-
+    
     // Lista de páginas correspondentes a cada índice do BottomNavigationBar
     final List<Widget> _pages = [
       Pantalla1_Inicio(),
@@ -36,7 +40,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
     @override
     Widget build(BuildContext context) {
-      
+      final modoTrabajo = Provider.of<ModoTrabajo>(context);
       return MaterialApp(
         home: Scaffold(
           //configuración de la barra superior de la aplicación
