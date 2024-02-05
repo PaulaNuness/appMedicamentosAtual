@@ -13,6 +13,7 @@ class Pantalla1_Inicio extends StatelessWidget {
   TextEditingController usuarioController = TextEditingController();
   TextEditingController contrasenaController = TextEditingController();
   static int id=0;
+  static String nombre="";
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +33,6 @@ class Pantalla1_Inicio extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Pantalla8_configuracion(),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -222,12 +210,14 @@ class Pantalla1_Inicio extends StatelessWidget {
                         await bdHelper.consultarSQL(
                       "SELECT id FROM Usuario WHERE nombre = '$usuario' AND contrasena = '$contrasena'",
                     );
+                
 
                     if (resultado.isNotEmpty) {
                       id = resultado[0]['id'];
                       print('ID do Usuário: $id');
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setString('minhaVariavel', 'id');
+                      nombre=usuario;
 
                       Navigator.push(
                         context,

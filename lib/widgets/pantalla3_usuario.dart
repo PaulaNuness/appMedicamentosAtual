@@ -5,6 +5,7 @@ import 'package:flutter1/modo/modo_trabajo.dart';
   import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
   import 'package:flutter1/widgets/pantalla6_agenda_medicamientos.dart';
   import 'package:flutter1/widgets/pantalla7_borrar_medicamento.dart';
+import 'package:flutter1/widgets/pantalla8_configuracion.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
   class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
     int _selectedIndex = 0;
+    String minhavariavel2 = Pantalla1_Inicio.nombre.toUpperCase();
     
     // Lista de páginas correspondentes a cada índice do BottomNavigationBar
     final List<Widget> _pages = [
@@ -48,7 +50,7 @@ import 'package:shared_preferences/shared_preferences.dart';
             backgroundColor: Colors.grey[300],
             title: Center(
               child: Text(
-                'Hola, Bienvenido.',
+                'Hola, $minhavariavel2.',
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.pink,
@@ -58,6 +60,19 @@ import 'package:shared_preferences/shared_preferences.dart';
                 ),
               ),
             ),
+                    actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Pantalla8_configuracion(),
+                ),
+              );
+            },
+          ),
+        ],
           ),
 
           //Drawer (menú lateral derecha, denrto de la barra superior)
