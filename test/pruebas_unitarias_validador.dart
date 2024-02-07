@@ -10,7 +10,7 @@ test('isDateValid should return true for a valid date', () {
 
 test('isSexValid should return true for a valid sex', () {
       final validations = Validations();
-      expect(validations.isSexValid('hombrerrrrr'), true);
+      expect(validations.isSexValid('hombre'), true);
     });
 
 
