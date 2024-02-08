@@ -44,6 +44,7 @@ import 'package:shared_preferences/shared_preferences.dart';
     Widget build(BuildContext context) {
       final modoTrabajo = Provider.of<ModoTrabajo>(context);
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
           //configuración de la barra superior de la aplicación
           appBar: AppBar(

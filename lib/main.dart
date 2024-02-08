@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
     final temaActual=Provider.of<CargadorTema>(context).temaActual;
     
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Medicame',
       theme: temaActual,
       home:  Pantalla1_Inicio(),
