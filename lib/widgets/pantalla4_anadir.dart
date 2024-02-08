@@ -20,7 +20,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
     String? selectedDias;
     String? selectedComprimidos;
     List<String> selectedHorarios = [];
-    int minhavariavel=Pantalla1_Inicio.id;
+    //int minhavariavel=Pantalla1_Inicio.id;
 
     TextEditingController recomendacionesController = TextEditingController();
 
@@ -267,7 +267,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
 
       // Cria um mapa com os dados do medicamento
       Map<String, dynamic> fila = {
-        'idUsuario':minhavariavel,
+        'idUsuario':1,
         'nome': selectedMedicamento,
         'quantidade': int.parse(selectedNumero ?? '0'),
         'unidadeTempo': selectedDias,
@@ -340,3 +340,5 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
       return emptyFields;
     }
   }
+  
+

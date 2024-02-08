@@ -55,8 +55,8 @@ Future<void> mostrarNotification(String title, String body) async {
 
 
   //mostramos la notificacion
-  await flutterNotificationsPlugin.show(
-      0, title, body, notificationDetails,payload: 'item x');
+  // await flutterNotificationsPlugin.show(
+  //     0, title, body, notificationDetails,payload: 'item x');
 }
 
 //funcion para llamar a emergencias
