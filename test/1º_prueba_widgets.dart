@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter1/widgets/Registro_hecho.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 void main() {//tenemos una prueba 
   testWidgets('Teste do RegistroHecho Widget', (WidgetTester tester) async {
     // Construir o widget
@@ -11,5 +10,9 @@ void main() {//tenemos una prueba
     // Verificar se o texto 'Muy bien!!! Registro hecho' está presente na tela
     expect(find.text('Muy bien!!! Registro hecho'), findsOneWidget);
 
+    // Verificar se o teste passou e imprimir uma mensagem na console
+    if (tester.takeException() == null) {
+      print('Teste do RegistroHecho Widget: OK');
+    } 
   });
 }
