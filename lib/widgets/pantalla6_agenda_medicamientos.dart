@@ -23,7 +23,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   BDHelper bdHelper = BDHelper();
   List<Map<String, dynamic>> medicamentosAReponer = [];
   List<Map<String, dynamic>> proximasVisitas = [];
-  //int minhavariavel = Pantalla1_Inicio.id;
+  int minhavariavel = Pantalla1_Inicio.id;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   }
 
   Future<void> _carregarMedicamentos() async {
-    List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos(1);
+    List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos(minhavariavel);
 
     setState(() {
       medicamentosAReponer = medicamentos;
@@ -41,7 +41,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   }
 
   Future<void> _carregarVisitas() async {
-    List<Map<String, dynamic>> visitas = await bdHelper.consultarVisitas(1);
+    List<Map<String, dynamic>> visitas = await bdHelper.consultarVisitas(minhavariavel);
 
     setState(() {
       proximasVisitas = visitas;

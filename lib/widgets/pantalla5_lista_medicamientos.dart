@@ -11,7 +11,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
   class _MedicamentosScreenState extends State<pantalla5_lista_medicamientos> {
     BDHelper bdHelper = BDHelper();
     List<Map<String, dynamic>> medicamentosAReponer = [];
-    //int minhavariavel=Pantalla1_Inicio.id;
+    int minhavariavel=Pantalla1_Inicio.id;
 
     @override
     void initState() {
@@ -20,7 +20,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
     }
 
     Future<void> _carregarMedicamentos() async {
-      List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos( 1);
+      List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos( minhavariavel);
 
       setState(() {
         medicamentosAReponer = medicamentos;

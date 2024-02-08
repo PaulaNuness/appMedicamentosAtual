@@ -17,7 +17,7 @@ class VisitaMedica{
   VisitaMedica()
   {
     this._id = 0;
-    //this.idUsuario=Pantalla1_Inicio.id;
+    this.idUsuario=Pantalla1_Inicio.id;
     this._especialidad = '';
     this._doctor = '';
     this._lugar = '';

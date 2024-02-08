@@ -15,6 +15,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 
 class Pantalla1_Inicio extends StatefulWidget {
+  static var nombre;
+
+  static int id=0;
+
   const Pantalla1_Inicio({super.key});
 
   @override
@@ -314,8 +318,8 @@ class _nameState extends State<Pantalla1_Inicio> {
                       print('ID do Usuário: $id');
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setString('minhaVariavel', 'id');
-                      nombre=usuario;
 
+                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(
