@@ -19,13 +19,17 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
       _carregarMedicamentos();
     }
 
-    Future<void> _carregarMedicamentos() async {
-      List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos(minhavariavel);
+  Future<void> _carregarMedicamentos() async {
+  List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos(minhavariavel);
 
-      setState(() {
-        medicamentosAReponer = medicamentos;
-      });
-    }
+  // Verifica se o widget está montado antes de chamar setState()
+  if (mounted) {
+    setState(() {
+      medicamentosAReponer = medicamentos;
+    });
+  }
+}
+
 
     Future<void> _borrarMedicamento(int id) async {
       await bdHelper.borrarMedicamento(id);
