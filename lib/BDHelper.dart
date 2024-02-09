@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter1/models/medicamento.dart';
+import 'package:flutter1/models/usuario.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -100,6 +101,26 @@ import 'package:path/path.dart';
       }
     }
   }
+
+  Future<Usuario> obtenerUsuarioPorId(int id) async {
+  Database? bd = await baseDatos;
+  Usuario usuario = Usuario(); // Crie uma instância de Usuario vazia
+  
+  if (bd != null) {
+    List<Map<String, dynamic>> resultado = await bd.query(
+      'Usuario',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (resultado.isNotEmpty) {
+      usuario = Usuario.fromMap(resultado.first); // Crie um usuário com base nos dados obtidos do banco de dados
+    }
+  }
+  
+  return usuario;
+}
+
 
   _inicializarBD() async {
     var directorio = await getDatabasesPath();

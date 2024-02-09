@@ -5,13 +5,15 @@ class Usuario {
   late String _fechanacimento;
   late String _sexo;
 
+
+
   //constructor
-  Usuario(String nombre,String contrasena,String fechanacimento,String sexo) {
-    this._id=0;
-    this._nombre = '';
-    this._contrasena = '';
-    this._fechanacimento = '';
-    this._sexo = '';
+  Usuario() {
+   this._id=0;
+   this._nombre = '';
+   this._contrasena = '';
+   this._fechanacimento = '';
+   this._sexo = '';
  
   }
 

@@ -11,7 +11,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
   class _MedicamentosScreenState extends State<pantalla7_borrar_medicamiento> {
     BDHelper bdHelper = BDHelper();
     List<Map<String, dynamic>> medicamentosAReponer = [];
-    int minhavariavel=Pantalla1_Inicio.id;
+    int minhavariavel=nameState.id;
 
     @override
     void initState() {

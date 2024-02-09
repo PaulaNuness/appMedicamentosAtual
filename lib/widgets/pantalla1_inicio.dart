@@ -15,17 +15,15 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 
 class Pantalla1_Inicio extends StatefulWidget {
-  static var nombre;
-
-  static int id=0;
+  
 
   const Pantalla1_Inicio({super.key});
 
   @override
-  State<Pantalla1_Inicio> createState() => _nameState();
+  State<Pantalla1_Inicio> createState() => nameState();
 }
 
-class _nameState extends State<Pantalla1_Inicio> {
+class nameState extends State<Pantalla1_Inicio> {
   
 
   BDHelper bdHelper = BDHelper();

@@ -23,7 +23,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   BDHelper bdHelper = BDHelper();
   List<Map<String, dynamic>> medicamentosAReponer = [];
   List<Map<String, dynamic>> proximasVisitas = [];
-  int minhavariavel = Pantalla1_Inicio.id;
+  int minhavariavel = nameState.id;
 
   @override
   void initState() {

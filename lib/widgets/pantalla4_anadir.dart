@@ -20,7 +20,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
     String? selectedDias;
     String? selectedComprimidos;
     List<String> selectedHorarios = [];
-    int minhavariavel=Pantalla1_Inicio.id;
+    int minhavariavel=nameState.id;
 
     TextEditingController recomendacionesController = TextEditingController();
 
