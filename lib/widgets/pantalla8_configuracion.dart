@@ -184,9 +184,26 @@ Container(
       ),
       ElevatedButton(
         onPressed: () {
-          // Função a ser executada quando o botão for pressionado
+
         },
-        child: Text('Meu Botão'),
+                             style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 152, 177, 233),
+                      padding: EdgeInsets.all(16.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
+                      ),
+                      elevation: 4.0,
+                      shadowColor: Color.fromARGB(255, 33, 33, 214),
+                    ),
+                             child: Text(
+                        'Cambiar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Sans-serif',
+                        ),
+                      ),
       ),
     ],
   ),
