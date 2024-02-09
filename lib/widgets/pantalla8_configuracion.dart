@@ -156,6 +156,42 @@ class PaginaConfiguracionState extends State<Pantalla8_configuracion> {
                   ],
                 ),
               ),
+                            SizedBox(height: 10), // Espaçamento
+              // Sección 3 Ajustes del tipo de usuario
+Container(
+  decoration: BoxDecoration(
+    border: Border.all(
+      color: Color.fromARGB(255, 62, 8, 161),
+      width: 3,
+    ),
+    borderRadius: BorderRadius.circular(10),
+  ),
+  child: Column(
+    children: [
+      Divider(
+        color: temaActual.temaActual.colorScheme.primary,
+      ),
+      ListTile(
+        title: Text(
+          "Cambiar datos personales",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: temaActual.temaActual.colorScheme.onSecondary,
+          ),
+        ),
+        tileColor: temaActual.temaActual.colorScheme.secondary,
+      ),
+      ElevatedButton(
+        onPressed: () {
+          // Função a ser executada quando o botão for pressionado
+        },
+        child: Text('Meu Botão'),
+      ),
+    ],
+  ),
+),
+
             ],
           ),
         ),
