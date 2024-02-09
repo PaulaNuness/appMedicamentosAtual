@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter1/modo/modo_trabajo.dart';
 import 'package:flutter1/tema/tema.dart';
 import 'package:flutter1/tipo_usuario/tipo_usuario.dart';
+import 'package:flutter1/widgets/pantalla10_camibiar_datos.dart';
 import 'package:provider/provider.dart';
 
 class Pantalla8_configuracion extends StatefulWidget {
@@ -184,15 +185,22 @@ Container(
       ),
       ElevatedButton(
         onPressed: () {
-
+                                              Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Pantalla10_Cambiar(),
+                                      ),
+                                    );
         },
                              style: ElevatedButton.styleFrom(
                       primary: Color.fromARGB(255, 152, 177, 233),
-                      padding: EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(6.0),
+                      
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0), // Ajuste o valor conforme necessário
                       ),
-                      elevation: 4.0,
+                      
+                      elevation: 2.0,
                       shadowColor: Color.fromARGB(255, 33, 33, 214),
                     ),
                              child: Text(
