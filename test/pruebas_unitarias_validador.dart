@@ -29,7 +29,7 @@ void main() {//tenemos 4 testes que estan comentados, descomente uno e pulse RUN
 
   // Expected: <true>
   // Actual: <false> porque solo podemos poner las palavras hombre o mujer
-//test('isSexValid should return true for a valid sex', () {
+///test('isSexValid should return true for a valid sex', () {
       //final validations = Validations();
       //expect(validations.isSexValid('gato'), true);
     //});
