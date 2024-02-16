@@ -20,6 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
   class _Pantalla3_usuarioState extends State<Pantalla3_usuario> {
     int _selectedIndex = 0;
+
     //String minhavariavel2 =Pantalla1_Inicio.nombre.toUpperCase();
     
     // Lista de páginas correspondentes a cada índice do BottomNavigationBar
@@ -51,7 +52,7 @@ import 'package:shared_preferences/shared_preferences.dart';
             backgroundColor: Colors.grey[300],
             title: Center(
               child: Text(
-                'Hola, ',
+                'Hola',
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.pink,

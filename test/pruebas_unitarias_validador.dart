@@ -6,10 +6,10 @@ void main() {//tenemos 4 testes que estan comentados, descomente uno e pulse RUN
 
   // Expected: <true>
   // Actual: <false> porque o ano nao esta entre 1900 e 2100
-//test('isDateValid should return true for a valid date', () {
-      //final validations = Validations();
-      //expect(validations.isDateValid('31/01/0000'), true);
-    //});
+test('isDateValid should return true for a valid date', () {
+      final validations = Validations();
+      expect(validations.isDateValid('31/01/0000'), true);
+    });
 
 
   // All tests passed! porque o ano esta entre 1900 e 2100

@@ -12,8 +12,6 @@ import 'package:flutter1/widgets/pantalla9_visitasmedicas.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-
-
 class AgendaMedicamentos extends StatefulWidget {
   @override
   _AgendaMedicamentosState createState() => _AgendaMedicamentosState();
@@ -33,7 +31,8 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   }
 
   Future<void> _carregarMedicamentos() async {
-    List<Map<String, dynamic>> medicamentos = await bdHelper.consultarMedicamentos(minhavariavel);
+    List<Map<String, dynamic>> medicamentos =
+        await bdHelper.consultarMedicamentos(minhavariavel);
 
     setState(() {
       medicamentosAReponer = medicamentos;
@@ -41,7 +40,8 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   }
 
   Future<void> _carregarVisitas() async {
-    List<Map<String, dynamic>> visitas = await bdHelper.consultarVisitas(minhavariavel);
+    List<Map<String, dynamic>> visitas =
+        await bdHelper.consultarVisitas(minhavariavel);
 
     setState(() {
       proximasVisitas = visitas;
@@ -106,7 +106,8 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                       children: [
                         ElevatedButton(
                           onPressed: () async {
-                            await bdHelper.decrementarQuantidadeMedicamento(medicamento['id'] as int);
+                            await bdHelper.decrementarQuantidadeMedicamento(
+                                medicamento['id'] as int);
                             await _carregarMedicamentos();
 
                             showDialog(
@@ -203,7 +204,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                 ),
                 SizedBox(height: 10),
                 Visibility(
-                  visible: !modoTrabajo.modoRemoto,//si es local
+                  visible: !modoTrabajo.modoRemoto, //si es local
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.pink),
@@ -250,82 +251,143 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                     ),
                   ),
                 ),
-Visibility(
-  visible: modoTrabajo.modoRemoto,
-  child: Container(
-    height: 150,
-    child: ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        final List<String> especialidades = ['Cardiologia', 'Dermatologia', 'Neurologia', 'Ortopedia', 'Pediatria', 'Oftalmologia', 'Geriatria', 'Ginecologia', 'Urologia', 'Endocrinologia'];
-        final List<String> nombres = ['Carlos', 'Manuel', 'Alvaro', 'Roberto', 'Sergio', 'Ivan', 'Jesus', 'Raul', 'Mario', 'Francisco'];
-        final fake = Faker();
-        final randomEspecialidade = fake.randomGenerator.element(especialidades);
-        final randomNombre = fake.randomGenerator.element(nombres);
-        return Card(
-          elevation: 5,
-          margin: EdgeInsets.all(10),
-          child: ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'DR. $randomNombre',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                Visibility(
+                  visible: modoTrabajo.modoRemoto,
+                  child: Container(
+                    height: 150,
+                    child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        final List<String> especialidades = [
+                          'Cardiologia',
+                          'Dermatologia',
+                          'Neurologia',
+                          'Ortopedia',
+                          'Pediatria',
+                          'Oftalmologia',
+                          'Geriatria',
+                          'Ginecologia',
+                          'Urologia',
+                          'Endocrinologia'
+                        ];
+                        final List<String> nombres = [
+                          'Carlos',
+                          'Manuel',
+                          'Alvaro',
+                          'Roberto',
+                          'Sergio',
+                          'Ivan',
+                          'Jesus',
+                          'Raul',
+                          'Mario',
+                          'Francisco'
+                        ];
+                        final fake = Faker();
+                        final randomEspecialidade =
+                            fake.randomGenerator.element(especialidades);
+                        final randomNombre =
+                            fake.randomGenerator.element(nombres);
+                        return Card(
+                          elevation: 5,
+                          margin: EdgeInsets.all(10),
+                          child: ListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'DR. $randomNombre',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ), // Espaço entre as duas linhas
+                                Text(
+                                  'Especialidad: $randomEspecialidade',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-                SizedBox(height: 8), // Espaço entre as duas linhas
-                Text(
-                  'Especialidad: $randomEspecialidade',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    ),
-  ),
-),
-
-
               ],
             ),
           ),
           SizedBox(height: 50),
         ],
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(10.0),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Añadir',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Agenda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Lista',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.pink,
+        unselectedItemColor: const Color.fromARGB(255, 228, 184, 198),
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          //adiciono la logica, que verifica qual item foi selecionado com base no índice e executa ações correspondentes
+          if (_selectedIndex == 0) {
+            Navigator.pushReplacement(
+              //navegar para uma nova tela
               context,
               MaterialPageRoute(
                 builder: (context) => Pantalla3_usuario(),
               ),
             );
-          },
-          style: ElevatedButton.styleFrom(
-            primary: Color.fromARGB(255, 152, 177, 233),
-            padding: EdgeInsets.symmetric(vertical: 15.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ),
-          child: Text(
-            'Sair',
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
+          }
+          if (_selectedIndex == 1) {
+            Navigator.pushReplacement(
+              //navegar para uma nova tela
+              context,
+              MaterialPageRoute(
+                builder: (context) => Pantalla4_Anadir(),
+              ),
+            );
+          }
+          if (_selectedIndex == 2) {
+            Navigator.pushReplacement(
+              //navegar para uma nova tela
+              context,
+              MaterialPageRoute(
+                builder: (context) => AgendaMedicamentos(),
+              ),
+            );
+          }
+          if (_selectedIndex == 3) {
+            Navigator.pushReplacement(
+              //navegar para uma nova tela
+              context,
+              MaterialPageRoute(
+                builder: (context) => pantalla5_lista_medicamientos(),
+              ),
+            );
+          }
+        },
       ),
     );
   }

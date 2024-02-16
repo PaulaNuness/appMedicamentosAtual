@@ -214,7 +214,8 @@ class _Pantalla10_CambiarState extends State<Pantalla10_Cambiar> {
                           'SALIR',
                           style: TextStyle(
                             color: Color.fromARGB(255, 227, 227, 235),
-                            fontSize: 21,
+                            fontSize: 15
+                            ,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Sans-serif',
                           ),
@@ -429,7 +430,7 @@ class _Pantalla10_CambiarState extends State<Pantalla10_Cambiar> {
                           'ACTUALIZAR',
                           style: TextStyle(
                             color: Color.fromARGB(255, 227, 227, 235),
-                            fontSize: 21,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Sans-serif',
                           ),

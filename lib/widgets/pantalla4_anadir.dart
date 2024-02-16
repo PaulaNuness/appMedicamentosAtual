@@ -6,6 +6,8 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
   import 'package:flutter/material.dart';
   import 'package:flutter1/BDHelper.dart';
   import 'package:flutter1/widgets/pantalla3_usuario.dart';
+import 'package:flutter1/widgets/pantalla5_lista_medicamientos.dart';
+import 'package:flutter1/widgets/pantalla6_agenda_medicamientos.dart';
 
   class Pantalla4_Anadir extends StatefulWidget {
     @override
@@ -13,6 +15,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
   }
 
   class _Pantalla4AnadirState extends State<Pantalla4_Anadir> {
+    int _selectedIndex = 0;
     BDHelper bdHelper = BDHelper();
 
     String? selectedMedicamento;
@@ -237,6 +240,74 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
             ),
           ),
         ),
+                  //la barra abajo que navegamos, por las pantallas
+          bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                //el icono de home
+                icon: Icon(Icons.home),
+                label: 'Inicio',
+                
+              ),
+              BottomNavigationBarItem(
+                //el icono de +
+                icon: Icon(Icons.add),
+                label: 'Añadir',
+              ),
+              BottomNavigationBarItem(
+                //el icono de un calendario
+                icon: Icon(Icons.calendar_today),
+                label: 'Agenda',
+              ),
+              BottomNavigationBarItem(
+                //el icono de icono burguer
+                icon: Icon(Icons.list),
+                label: 'Lista',
+              ),
+            ],
+
+            currentIndex: _selectedIndex,//widget de navegação que tem um índice de item atualmente selecionado. O valor desse índice está armazenado na variável _selectedIndex
+            onTap: (index){// O índice do item tocado é passado como o parâmetro index
+              setState(() {// Atualiza o estado da classe StatefulWidget com o novo índice selecionado
+                _selectedIndex=index;
+              });
+              //adiciono la logica, que verifica qual item foi selecionado com base no índice e executa ações correspondentes
+              if(_selectedIndex==0){
+                Navigator.pushReplacement(//navegar para uma nova tela
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Pantalla3_usuario(),
+                  ),
+              );
+              }
+              if(_selectedIndex==1){
+                Navigator.pushReplacement(//navegar para uma nova tela
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Pantalla4_Anadir(),
+                  ),
+              );
+              }
+              if(_selectedIndex==2){
+                Navigator.pushReplacement(//navegar para uma nova tela
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AgendaMedicamentos(),
+                  ),
+              );
+              }
+              if(_selectedIndex==3){
+                Navigator.pushReplacement(//navegar para uma nova tela
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => pantalla5_lista_medicamientos(),
+                  ),
+              );
+              }
+            },
+            selectedItemColor: Colors.pink,//color del texto,
+            unselectedItemColor: const Color.fromARGB(255, 228, 184, 198),//color del texto,
+          ),
       );
     }
 
@@ -250,7 +321,7 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text("Campos Inválidos"),
-              content: Text("Por favor, preencha todos os campos corretamente.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,)),
+              content: Text("Por favor, completa todos los campos.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,)),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -283,8 +354,8 @@ import 'package:flutter1/widgets/pantalla1_inicio.dart';
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Medicamento Inserido"),
-              content: Text("Medicamento inserido com sucesso!"),
+              title: Text("Medicamento Insertado"),
+              content: Text("El medicamento se ha añadido con éxito !"),
               actions: [
                 TextButton(
                   onPressed: () {

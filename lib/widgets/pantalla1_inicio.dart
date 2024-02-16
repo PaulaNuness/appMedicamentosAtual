@@ -317,6 +317,10 @@ class nameState extends State<Pantalla1_Inicio> {
                       print('ID de Usuario: $id');
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setString('minhaVariavel', 'id');
+                      id = resultado[0]['id'];
+                      print('ID de Usuario: $nombre');
+                      final prefs2 = await SharedPreferences.getInstance();
+                      prefs.setString('minhaVariavel2', 'nombre');
 
                       
                       Navigator.push(
