@@ -443,8 +443,6 @@ class nameState extends State<Pantalla1_Inicio> {
         ),
       ),
     );
-  }
-
-  
+  } 
   
 }

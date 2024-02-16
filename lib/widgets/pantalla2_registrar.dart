@@ -220,7 +220,7 @@
                                     return AlertDialog(
                                       title: Text("Error"),
                                       content: Text(
-                                        "Por favor, complete todos los campos.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)
+                                        "Por favor, completa todos los campos.",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.pink,)
                                       ),
                                       actions: [
                                         TextButton(
