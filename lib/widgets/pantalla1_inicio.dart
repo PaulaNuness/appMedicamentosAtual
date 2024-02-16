@@ -29,6 +29,7 @@ class nameState extends State<Pantalla1_Inicio> {
   BDHelper bdHelper = BDHelper();
   TextEditingController usuarioController = TextEditingController();
   TextEditingController contrasenaController = TextEditingController();
+  //variables que quiero utilizar en otras pantallas
   static int id=0;
   static String nombre="";
   final int bufferSize = 100;
@@ -142,7 +143,7 @@ class nameState extends State<Pantalla1_Inicio> {
               Column(
                 children: [
                   Text(
-                    'Usuário',
+                    'Usuario',
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -200,14 +201,14 @@ class nameState extends State<Pantalla1_Inicio> {
                     String usuario = usuarioController.text;
                     String contrasena = contrasenaController.text;
 
-                    if (usuario.isEmpty && contrasena.isEmpty) {
+                    if (usuario.isEmpty && contrasena.isEmpty) {//se esta vacio
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Erro"),
                             content: Text(
-                              "Por favor, preencha o usuário e a senha.",
+                              "Por favor, completa el campo de usuario y contraseña.",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -235,14 +236,14 @@ class nameState extends State<Pantalla1_Inicio> {
                       return;
                     }
 
-                    if (usuario.isEmpty) {
+                    if (usuario.isEmpty) {//si solo usuario esta vacio
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Erro"),
                             content: Text(
-                              "Por favor, preencha o campo de usuário.",
+                              "Por favor, completa el campo de usuario.",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -270,14 +271,14 @@ class nameState extends State<Pantalla1_Inicio> {
                       return;
                     }
 
-                    if (contrasena.isEmpty) {
+                    if (contrasena.isEmpty) {//si solo contraseña esta vacia
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Erro"),
                             content: Text(
-                              "Por favor, preencha o campo de senha.",
+                              "Por favor, completa el campo de contraseña.",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -313,7 +314,7 @@ class nameState extends State<Pantalla1_Inicio> {
 
                     if (resultado.isNotEmpty) {
                       id = resultado[0]['id'];
-                      print('ID do Usuário: $id');
+                      print('ID de Usuario: $id');
                       final prefs = await SharedPreferences.getInstance();
                       prefs.setString('minhaVariavel', 'id');
 
@@ -329,9 +330,9 @@ class nameState extends State<Pantalla1_Inicio> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Erro de Autenticação"),
+                            title: Text("Error de Autenticación"),
                             content: Text(
-                              "Credenciais incorretas. Tente novamente.",
+                              "Credenciales incorrectas. Inténtalo de nuevo.",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -436,7 +437,7 @@ class nameState extends State<Pantalla1_Inicio> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
-                  ),))  : Text('No hay caida'),
+                  ),))  : Text('No hay caída'),
             ],
           ),
         ),
