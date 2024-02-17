@@ -11,6 +11,7 @@ test('isDateValid should return true for a valid date', () {
       expect(validations.isDateValid('31/01/0000'), true);
     });
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // All tests passed! porque o ano esta entre 1900 e 2100
 //test('isDateValid should return true for a valid date', () {
@@ -18,6 +19,7 @@ test('isDateValid should return true for a valid date', () {
       //expect(validations.isDateValid('31/01/2024'), true);
     //});
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // All tests passed! porque podemos poner las palavras hombre o mujer
 //test('isSexValid should return true for a valid sex', () {
@@ -26,6 +28,7 @@ test('isDateValid should return true for a valid date', () {
     //});
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Expected: <true>
   // Actual: <false> porque solo podemos poner las palavras hombre o mujer
@@ -34,5 +37,6 @@ test('isDateValid should return true for a valid date', () {
       //expect(validations.isSexValid('gato'), true);
     //});
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
