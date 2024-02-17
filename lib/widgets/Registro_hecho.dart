@@ -47,7 +47,14 @@ class RegistroHecho extends StatelessWidget {
               ),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                                                      
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Pantalla1_Inicio(),
+                                      ),
+                                    );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(255, 233, 83, 208),
