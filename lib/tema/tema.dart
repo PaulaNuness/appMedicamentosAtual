@@ -37,7 +37,7 @@ class CargadorTema with ChangeNotifier {
         break;
     }
   }
-  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   set temaOscuro(bool value) {
     this._temaOscuro = value;
     this._temaClaro = !value;
@@ -50,7 +50,7 @@ class CargadorTema with ChangeNotifier {
     }
     notifyListeners();
   }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   set temaClaro(bool value) {
     this._temaClaro = value;
     this._temaOscuro = !value;
@@ -62,7 +62,7 @@ class CargadorTema with ChangeNotifier {
     }
     notifyListeners();
   }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ThemeData _miTemaClaro(){
     return (ThemeData.light().copyWith(
           colorScheme: const ColorScheme(
@@ -83,6 +83,7 @@ class CargadorTema with ChangeNotifier {
         )
       );
   }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ThemeData _miTemaOscuro(){
     return (ThemeData.dark().copyWith(
         colorScheme: const ColorScheme(
@@ -103,5 +104,5 @@ class CargadorTema with ChangeNotifier {
       )
     );
   }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -8,7 +8,7 @@ class ModoTrabajo with ChangeNotifier {
 
   bool get modoLocal => this._modoLocal;
   bool get modoRemoto => this._modoRemoto;
-  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ModoTrabajo() {
     bool local=false;
     _modoFuncionamientoLocal().then((value) => local=value);
@@ -20,7 +20,7 @@ class ModoTrabajo with ChangeNotifier {
       this._modoRemoto = true;
     }
   }
-  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   set modoLocal(bool value) {
     this._modoLocal = value;
     this._modoRemoto = !value;
@@ -31,7 +31,7 @@ class ModoTrabajo with ChangeNotifier {
     }
     notifyListeners();
   }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   set modoRemoto(bool value) {
     this._modoRemoto = value;
     this._modoLocal = !value;
@@ -42,7 +42,7 @@ class ModoTrabajo with ChangeNotifier {
     }
     notifyListeners();
   }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   Future<bool> _modoFuncionamientoLocal() async {
     String? modoTrabajo=await Configuracion().getParametro('modoTrabajo');
     if(modoTrabajo==null)
@@ -59,5 +59,5 @@ class ModoTrabajo with ChangeNotifier {
       return false;
     }
   }
-  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

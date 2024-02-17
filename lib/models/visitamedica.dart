@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter1/BDHelper.dart';
 import 'package:flutter1/widgets/pantalla1_inicio.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class VisitaMedica{
   int? _id;
@@ -13,6 +16,7 @@ class VisitaMedica{
   late String _dia;
   late String _hora;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Constructor de la clase
   VisitaMedica()
   {
@@ -25,7 +29,8 @@ class VisitaMedica{
     this._dia=this._fecha.day.toString()+'/'+this._fecha.month.toString()+'/'+this._fecha.year.toString();
     this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
   }
-  
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Constructores con parametros
   VisitaMedica.withOutId(int idUsuario,String especialidad, String doctor, String lugar, DateTime fecha)
   {
@@ -38,6 +43,7 @@ class VisitaMedica{
     this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
   }
   
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   VisitaMedica.withId(int id,int idUsuario, String especialidad, String doctor, String lugar, DateTime fecha)
   {
     this._id = id;
@@ -50,6 +56,7 @@ class VisitaMedica{
     this._hora = this._fecha.hour.toString()+':'+this._fecha.minute.toString();
   }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   VisitaMedica.fromMap(dynamic obj)
   {
     this._id = obj['id'];
@@ -63,6 +70,7 @@ class VisitaMedica{
 
   }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Getters
   int? get id => _id;
   int get getIdUsuario => idUsuario;
@@ -73,6 +81,7 @@ class VisitaMedica{
   String get dia => _dia;
   String get hora => _hora;
   
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Setters
   set especialidad(String especialidad)
   {
@@ -110,6 +119,7 @@ class VisitaMedica{
     this.fecha = new DateTime(this._fecha.year, this._fecha.month, this._fecha.day, horas, minutos);
   }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Metodo para convertir un objeto de tipo VisitaMedica a Map
   Map<String, dynamic> toMap()
   {
@@ -150,32 +160,40 @@ class VisitaMedica{
     else
     {
       //Si el modo de trabajo es remoto, se cargan los datos de la API
-      proximasVisitas = await _getFromAPI(10);
+      proximasVisitas = await getFromAPI();
     }
     
     return proximasVisitas;
   }
-
-    //lectura de datos de la API
-  Future<List<VisitaMedica>> _getFromAPI(int numero) async {
-
-    List<VisitaMedica> lista = [];
-    VisitaMedica visitaMedica = new VisitaMedica();
-    var map = new Map<String, dynamic>();
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  VisitaMedica.fromMap2(dynamic obj) {
     
-    for(int i=0;i<numero;i++)
-    {
-      await Future.delayed(Duration(milliseconds: 200), () {
-        map['id'] = i;
-        map['especialidad'] = 'Especialidad '+i.toString();
-        map['doctor'] = 'Doctor '+i.toString();
-        map['lugar'] = 'Lugar '+i.toString();
-        map['fecha'] = DateTime.now().toString();
-        visitaMedica = VisitaMedica.fromMap(map);
-        lista.add(visitaMedica);
-      });
-    }
-    return lista;
+    this._doctor = ' ${obj['doctor']}';
+    this._especialidad = ' ${obj['especialidad']}';
   }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //lectura de datos de la API
+  static  Future<List<VisitaMedica>> getFromAPI() async {
+    final response =
+        await http.get(Uri.parse('http://10.196.61.215:8000/visitamedica/todas_las_visitas'));
+    if (response.statusCode == 200) {
+      List<VisitaMedica> lista = [];
+      VisitaMedica visitaMedica = new VisitaMedica();
+      var data = json.decode(response.body);
+      for (int i = 0; i < data.length; i++) {
+        if (data[i]['doctor'] != null && data[i]['especialidad'] != null) {
+          visitaMedica = VisitaMedica.fromMap2(data[i]);
+          lista.add(visitaMedica);
+        } else {
+          String valorPadrao = 'Nome não disponível';
+        }
+      }
+      return lista;
+    } else {
+      throw Exception('Error al leer datos de la API');
+    }
+  }
+  
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

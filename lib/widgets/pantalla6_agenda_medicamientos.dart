@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter1/BDHelper.dart';
+import 'package:flutter1/models/visitamedica.dart';
 import 'package:flutter1/modo/modo_trabajo.dart';
 import 'package:flutter1/widgets/Registro_hecho.dart';
 import 'package:flutter1/widgets/pantalla1_inicio.dart';
@@ -21,6 +22,7 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
   BDHelper bdHelper = BDHelper();
   List<Map<String, dynamic>> medicamentosAReponer = [];
   List<Map<String, dynamic>> proximasVisitas = [];
+  List<VisitaMedica> proximasVisitas2 = []; // Alteração do tipo de lista
   int minhavariavel = nameState.id;
 
   @override
@@ -28,6 +30,17 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
     super.initState();
     _carregarMedicamentos();
     _carregarVisitas();
+    _carregarVisitasFromAPI(); // Chama a função para carregar visitas da API
+  }
+    Future<void> _carregarVisitasFromAPI() async {
+    try {
+      List<VisitaMedica> visitas = await VisitaMedica.getFromAPI();
+      setState(() {
+        proximasVisitas2 = visitas;
+      });
+    } catch (e) {
+      print('Erro ao carregar visitas médicas da API: $e');
+    }
   }
 
   Future<void> _carregarMedicamentos() async {
@@ -251,73 +264,45 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
                     ),
                   ),
                 ),
-                Visibility(
-                  visible: modoTrabajo.modoRemoto,
-                  child: Container(
-                    height: 150,
-                    child: ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        final List<String> especialidades = [
-                          'Cardiologia',
-                          'Dermatologia',
-                          'Neurologia',
-                          'Ortopedia',
-                          'Pediatria',
-                          'Oftalmologia',
-                          'Geriatria',
-                          'Ginecologia',
-                          'Urologia',
-                          'Endocrinologia'
-                        ];
-                        final List<String> nombres = [
-                          'Carlos',
-                          'Manuel',
-                          'Alvaro',
-                          'Roberto',
-                          'Sergio',
-                          'Ivan',
-                          'Jesus',
-                          'Raul',
-                          'Mario',
-                          'Francisco'
-                        ];
-                        final fake = Faker();
-                        final randomEspecialidade =
-                            fake.randomGenerator.element(especialidades);
-                        final randomNombre =
-                            fake.randomGenerator.element(nombres);
-                        return Card(
-                          elevation: 5,
-                          margin: EdgeInsets.all(10),
-                          child: ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'DR. $randomNombre',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ), // Espaço entre as duas linhas
-                                Text(
-                                  'Especialidad: $randomEspecialidade',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
+    Visibility(
+      visible: modoTrabajo.modoRemoto,
+      child: Container(
+        height: 150,
+        child: ListView.builder(
+          itemCount: proximasVisitas2.length, // Usando o tamanho da lista de visitas
+          itemBuilder: (context, index) {
+            final visita = proximasVisitas2[index]; // Obtendo a visita atual da lista
+            return Card(
+              elevation: 5,
+              margin: EdgeInsets.all(10),
+              child: ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'DR. ${visita.doctor}', // Usando o nome do médico da visita
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Especialidad: ${visita.especialidad}', // Usando a especialidade da visita
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+            );
+          },
+        ),
+      ),
+    ),
               ],
             ),
           ),
@@ -402,3 +387,5 @@ class _AgendaMedicamentosState extends State<AgendaMedicamentos> {
     }
   }
 }
+
+

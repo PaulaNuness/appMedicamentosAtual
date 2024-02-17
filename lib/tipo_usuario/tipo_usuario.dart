@@ -19,7 +19,7 @@ class TipoUsuario with ChangeNotifier {
       this._isUser = true;
     }
   }
-  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   set isAdmin(bool value) {
     this._isAdmin = value;
     this._isUser = !value;
@@ -30,7 +30,7 @@ class TipoUsuario with ChangeNotifier {
     }
     notifyListeners();
   }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   set isUser(bool value) {
     this._isUser = value;
     this._isAdmin = !value;
@@ -41,7 +41,7 @@ class TipoUsuario with ChangeNotifier {
     }
     notifyListeners();
   }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   Future<bool> _checkTipoUsuario() async {
     String? tipoUsuario = await Configuracion().getParametro('tipoUsuario');
     if (tipoUsuario == null) {
@@ -54,4 +54,5 @@ class TipoUsuario with ChangeNotifier {
       return false;
     }
   }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

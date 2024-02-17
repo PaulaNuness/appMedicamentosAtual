@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 final FlutterLocalNotificationsPlugin flutterNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //funcion para inicializar las notificaciones
 Future<void> initNotifications() async {
   
@@ -35,7 +35,7 @@ Future<void> initNotifications() async {
   
   await flutterNotificationsPlugin.initialize(initializationSettings);
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //funcion para mostrar una notificacion
 
 Future<void> mostrarNotification(String title, String body) async {
@@ -58,7 +58,7 @@ Future<void> mostrarNotification(String title, String body) async {
   // await flutterNotificationsPlugin.show(
   //     0, title, body, notificationDetails,payload: 'item x');
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //funcion para llamar a emergencias
 
 Future<void> llamaEmergencias() async {
@@ -70,3 +70,4 @@ Future<void> llamaEmergencias() async {
     throw 'No se pudo llamar a $numeroEmergencias';
   }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
